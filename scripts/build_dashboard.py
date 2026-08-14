@@ -17,7 +17,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f5f6f8; color:#2b3245; }
-  .wrap { max-width:1280px; margin:0 auto; padding:20px 16px 40px; }
+  .wrap { max-width:1480px; margin:0 auto; padding:20px 16px 40px; }
   header { background:linear-gradient(135deg,#1e3a5f,#2b5b8f); color:#fff; border-radius:10px;
            padding:20px 26px; margin-bottom:18px; }
   header h1 { font-size:22px; font-weight:600; }
@@ -63,28 +63,58 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   /* 行业模块子图卡片(承接问号小标题) */
   .subcard { background:#fbfcfe; border:1px solid #eef1f5; border-radius:8px; padding:10px 12px; }
   .subtitle { font-size:13.5px; font-weight:600; color:#33405a; margin-bottom:6px; }
+  /* 侧边目录导航 */
+  html { scroll-behavior:smooth; }
+  .layout { display:flex; align-items:flex-start; gap:18px; }
+  .main { flex:1; min-width:0; }
+  .card { scroll-margin-top:14px; }
+  .sidenav { position:sticky; top:18px; width:190px; flex-shrink:0;
+             background:#fff; border-radius:10px; padding:12px 10px;
+             box-shadow:0 1px 3px rgba(30,45,80,.08); }
+  .sidenav .nav-title { font-size:11px; color:#9aa6ba; letter-spacing:2px;
+                        font-weight:600; padding:2px 10px 8px; }
+  .sidenav a { display:block; padding:7px 10px; margin-bottom:1px; border-radius:6px;
+               color:#4a5568; font-size:13px; text-decoration:none;
+               border-left:3px solid transparent; transition:all .15s; }
+  .sidenav a:hover { background:#f0f3f8; color:#1e3a5f; }
+  .sidenav a.active { background:#eaf1f9; color:#1e3a5f; font-weight:600; border-left-color:#2b5b8f; }
+  .sidenav a .no { display:inline-block; width:20px; color:#9aa6ba; font-size:12px; }
+  .sidenav a.active .no { color:#2b5b8f; }
+  .sidenav a.backtop { margin-top:8px; border-top:1px solid #eef1f5; padding-top:9px; color:#8a94a6; }
+  @media (max-width:1150px){ .sidenav { display:none; } }
 </style>
 </head>
-<body>
+<body id="top">
 <div class="wrap">
+  <div class="layout">
+    <aside class="sidenav">
+      <div class="nav-title">目录导航</div>
+      <a href="#sec1"><span class="no">①</span>中长期宽度</a>
+      <a href="#sec2"><span class="no">②</span>短期宽度</a>
+      <a href="#sec3"><span class="no">③</span>行业轮动</a>
+      <a href="#sec4"><span class="no">④</span>关注板块</a>
+      <a href="#sec5"><span class="no">⑤</span>期权PCR</a>
+      <a href="#top" class="backtop"><span class="no">↑</span>回到顶部</a>
+    </aside>
+    <div class="main">
   <header>
     <h1>A股市场情绪监控 Dashboard</h1>
     <div class="meta" id="metaLine"></div>
   </header>
 
-  <div class="card">
+  <div class="card" id="sec1">
     <h2>中长期市场宽度 &amp; 全市场平均股价<span class="qmark">?<span class="qtip">左轴三条线 = 站上20/50/120日均线的股票占比(%)。三线呈"20&gt;50&gt;120"阶梯且都&gt;60%为理想多头；若20高但120低(如当前)则是"短期反弹、长期套牢重"结构。右轴为全市场平均股价(前复权)。三线全&gt;80%弹过热警示、全&lt;20%弹超卖提示。</span></span></h2>
     <div class="desc">左轴：站上20/50/120日均线的股票占比（%）｜右轴：全市场平均股价（元，前复权口径）｜<b id="rangeL"></b><br>告警规则：三条宽度线最新值全部&gt;80%显示过热警示（红），全部&lt;20%显示超卖提示（绿）</div>
     <div id="chartBreadthLong" class="chart-tall"></div>
   </div>
 
-  <div class="card">
+  <div class="card" id="sec2">
     <h2>短期市场宽度（5日 / 10日）<span class="qmark">?<span class="qtip">站上5日/10日均线的股票占比(%)，短期情绪温度计。两线齐升=反弹初期情绪修复；齐跌=短期转弱。与"中长期宽度"配合：短中期共振走强=趋势确立。两线全&gt;80%或全&lt;20%时图中央弹告警。</span></span></h2>
     <div class="desc">站上5日与10日均线的股票占比（%）｜两条宽度线最新值全部&gt;80%或全部&lt;20%时显示告警文字</div>
     <div id="chartBreadthShort" class="chart"></div>
   </div>
 
-  <div class="card">
+  <div class="card" id="sec3">
     <h2>申万二级行业宽度周变化 <span class="tag" id="indTag"></span><span class="qmark">?<span class="qtip">按申万二级行业统计"站上5/10日均线"股票占比及其周变化。下方左图=本周改善最多的10行业，右图=恶化最多的10行业，用于发现资金行业流向。下方完整127行业表格可按任意列点击排序。</span></span></h2>
     <div class="desc">按"5日宽度周变化 + 10日宽度周变化"综合排序，左：改善最多 Top10 ｜ 右：恶化最多 Bottom10<br>着色规则：红=改善(正值) 绿=恶化(负值)，深色=5日 浅色=10日｜Top10 中偶见绿柱 = 该行业该项周变化为负、但另一项大幅改善使综合分靠前</div>
     <div class="dual">
@@ -100,13 +130,13 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <div id="indTableWrap"></div>
   </div>
 
-  <div class="card">
+  <div class="card" id="sec4">
     <h2>关注板块对比（近半个月，首日=100）<span class="qmark">?<span class="qtip">你关注的10个板块近半个月归一化净值(首日=100)，直接比相对强弱——线越靠上=同期越强。点击某条线或图例可"聚焦"该板块(其余变淡)，再点或点空白恢复。用于对比半导体/算力/券商等强弱轮动。</span></span></h2>
     <div class="desc">归一化净值走势，便于横向对比相对强弱｜<b id="rangeS"></b><br>交互：点击某条图线或图例可聚焦该板块（其余变淡），再次点击或点击空白处恢复</div>
     <div id="chartSectors" class="chart-tall"></div>
   </div>
 
-  <div class="card">
+  <div class="card" id="sec5">
     <h2>ETF期权 Put/Call Ratio（成交量口径）<span class="qmark">?<span class="qtip">认沽成交量÷认购成交量。&gt;1 认沽更活跃(情绪偏空/可能见底)，&lt;1 偏多。逆向指标：极端高(如&gt;1.2)常对应阶段底、极端低(&lt;0.6)常对应过热。三条线对应沪深300/中证500/科创50ETF期权，可点击聚焦；PCR=1为参考线。</span></span></h2>
     <div class="desc">沪深300ETF / 中证500ETF / 科创50ETF 期权认沽认购成交量比，数据来源：上交所每日统计｜<b id="rangeP"></b><br>交互：点击图线或图例聚焦该品种（其余变淡），再次点击或点击空白处恢复；PCR=1 为参考线不参与聚焦</div>
     <div id="chartPcr" class="chart"></div>
@@ -121,6 +151,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     · 期权 PCR = 认沽成交量 ÷ 认购成交量。<span class="src">来源：上海证券交易所官网每日统计。</span><br>
     · 数据区间：2025-01-01 起（板块模块为近半个月），更新于 <span id="updatedAt"></span>。本页面仅供市场观察，不构成投资建议。
   </footer>
+    </div>
+  </div>
 </div>
 
 <script>__ECHARTS__</script>
@@ -429,6 +461,23 @@ function indBarOption(title, rows, legendColors) {
     document.getElementById('rangeP').textContent =
       '数据区间 ' + pd[0] + ' ~ ' + pd[pd.length-1];
   }
+})();
+
+// 侧边导航 scrollspy：滚动时高亮当前可视模块
+(function(){
+  const links = Array.from(document.querySelectorAll('.sidenav a[href^="#sec"]'));
+  const ids = links.map(a=>a.getAttribute('href').slice(1));
+  function onScroll(){
+    const y = window.scrollY + 140;
+    let current = ids[0];
+    ids.forEach(id=>{
+      const el = document.getElementById(id);
+      if (el && el.offsetTop <= y) current = id;
+    });
+    links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+current));
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 })();
 
 window.addEventListener('resize', ()=>{
