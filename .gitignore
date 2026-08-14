@@ -1,0 +1,24 @@
+# ===== WorkBuddy 项目内部数据（非源码/非业务数据，不入库） =====
+.workbuddy/
+
+# ===== 行情原始数据：5300+ 个 parquet 约 148M，由 update.py 重新拉取，不入库 =====
+data/kline/
+
+# ===== 运行时日志与错误记录 =====
+data/*.log
+data/fetch_errors.csv
+
+# ===== 本地 echarts 源（已内联进 dashboard.html，冗余） =====
+output/echarts.min.js
+
+# ===== 临时 JS 语法自检产物 =====
+output/_check.js
+
+# ===== Python 缓存 =====
+__pycache__/
+*.pyc
+
+# ===== 虚拟环境（如有） =====
+.venv/
+venv/
+env/
