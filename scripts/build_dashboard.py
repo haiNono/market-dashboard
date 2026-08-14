@@ -45,6 +45,24 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   footer { font-size:12px; color:#8a94a6; line-height:1.9; background:#fff;
            border-radius:10px; padding:14px 20px; }
   .src { color:#2b5b8f; }
+  /* 图表用法问号气泡 */
+  .qmark { display:inline-flex; align-items:center; justify-content:center;
+           width:15px; height:15px; border-radius:50%; background:#9aa6ba; color:#fff;
+           font-size:11px; font-weight:700; line-height:1; cursor:help; margin-left:8px;
+           position:relative; vertical-align:middle; }
+  .qmark:hover { background:#2b5b8f; }
+  .qtip { visibility:hidden; opacity:0; position:absolute; top:148%; left:50%;
+          transform:translateX(-50%); width:300px; background:#1f2a3a; color:#e9edf3;
+          text-align:left; padding:9px 11px; border-radius:7px; font-size:11.5px;
+          line-height:1.65; font-weight:400; white-space:normal; z-index:999;
+          box-shadow:0 6px 18px rgba(0,0,0,.25); transition:opacity .15s; }
+  .qtip::after { content:''; position:absolute; bottom:100%; left:50%;
+                 transform:translateX(-50%); border:6px solid transparent;
+                 border-bottom-color:#1f2a3a; }
+  .qmark:hover .qtip { visibility:visible; opacity:1; }
+  /* 行业模块子图卡片(承接问号小标题) */
+  .subcard { background:#fbfcfe; border:1px solid #eef1f5; border-radius:8px; padding:10px 12px; }
+  .subtitle { font-size:13.5px; font-weight:600; color:#33405a; margin-bottom:6px; }
 </style>
 </head>
 <body>
@@ -55,35 +73,41 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   </header>
 
   <div class="card">
-    <h2>中长期市场宽度 &amp; 全市场平均股价</h2>
+    <h2>中长期市场宽度 &amp; 全市场平均股价<span class="qmark">?<span class="qtip">左轴三条线 = 站上20/50/120日均线的股票占比(%)。三线呈"20&gt;50&gt;120"阶梯且都&gt;60%为理想多头；若20高但120低(如当前)则是"短期反弹、长期套牢重"结构。右轴为全市场平均股价(前复权)。三线全&gt;80%弹过热警示、全&lt;20%弹超卖提示。</span></span></h2>
     <div class="desc">左轴：站上20/50/120日均线的股票占比（%）｜右轴：全市场平均股价（元，前复权口径）｜<b id="rangeL"></b><br>告警规则：三条宽度线最新值全部&gt;80%显示过热警示（红），全部&lt;20%显示超卖提示（绿）</div>
     <div id="chartBreadthLong" class="chart-tall"></div>
   </div>
 
   <div class="card">
-    <h2>短期市场宽度（5日 / 10日）</h2>
+    <h2>短期市场宽度（5日 / 10日）<span class="qmark">?<span class="qtip">站上5日/10日均线的股票占比(%)，短期情绪温度计。两线齐升=反弹初期情绪修复；齐跌=短期转弱。与"中长期宽度"配合：短中期共振走强=趋势确立。两线全&gt;80%或全&lt;20%时图中央弹告警。</span></span></h2>
     <div class="desc">站上5日与10日均线的股票占比（%）｜两条宽度线最新值全部&gt;80%或全部&lt;20%时显示告警文字</div>
     <div id="chartBreadthShort" class="chart"></div>
   </div>
 
   <div class="card">
-    <h2>申万二级行业宽度周变化 <span class="tag" id="indTag"></span></h2>
+    <h2>申万二级行业宽度周变化 <span class="tag" id="indTag"></span><span class="qmark">?<span class="qtip">按申万二级行业统计"站上5/10日均线"股票占比及其周变化。下方左图=本周改善最多的10行业，右图=恶化最多的10行业，用于发现资金行业流向。下方完整127行业表格可按任意列点击排序。</span></span></h2>
     <div class="desc">按"5日宽度周变化 + 10日宽度周变化"综合排序，左：改善最多 Top10 ｜ 右：恶化最多 Bottom10<br>着色规则：红=改善(正值) 绿=恶化(负值)，深色=5日 浅色=10日｜Top10 中偶见绿柱 = 该行业该项周变化为负、但另一项大幅改善使综合分靠前</div>
     <div class="dual">
-      <div id="chartIndTop" class="chart"></div>
-      <div id="chartIndBottom" class="chart"></div>
+      <div class="subcard">
+        <div class="subtitle">改善最多 Top10<span class="qmark">?<span class="qtip">本周改善最多(5日+10日宽度周变化综合靠前)的10个申万二级行业。红柱=该项周变化为正(改善)、绿柱=为负(恶化)；深色=5日、浅色=10日。偶见绿柱=该项短期回落但另一项大幅改善使综合靠前。</span></span></div>
+        <div id="chartIndTop" class="chart"></div>
+      </div>
+      <div class="subcard">
+        <div class="subtitle">恶化最多 Bottom10<span class="qmark">?<span class="qtip">本周恶化最多的10个行业。绿柱=该项为负(恶化)、红柱=为正；深色=5日、浅色=10日。用于规避资金流出行业。结合下方表格绝对值可区分"极弱回补"与"强趋势回落"。</span></span></div>
+        <div id="chartIndBottom" class="chart"></div>
+      </div>
     </div>
     <div id="indTableWrap"></div>
   </div>
 
   <div class="card">
-    <h2>关注板块对比（近半个月，首日=100）</h2>
+    <h2>关注板块对比（近半个月，首日=100）<span class="qmark">?<span class="qtip">你关注的10个板块近半个月归一化净值(首日=100)，直接比相对强弱——线越靠上=同期越强。点击某条线或图例可"聚焦"该板块(其余变淡)，再点或点空白恢复。用于对比半导体/算力/券商等强弱轮动。</span></span></h2>
     <div class="desc">归一化净值走势，便于横向对比相对强弱｜<b id="rangeS"></b><br>交互：点击某条图线或图例可聚焦该板块（其余变淡），再次点击或点击空白处恢复</div>
     <div id="chartSectors" class="chart-tall"></div>
   </div>
 
   <div class="card">
-    <h2>ETF期权 Put/Call Ratio（成交量口径）</h2>
+    <h2>ETF期权 Put/Call Ratio（成交量口径）<span class="qmark">?<span class="qtip">认沽成交量÷认购成交量。&gt;1 认沽更活跃(情绪偏空/可能见底)，&lt;1 偏多。逆向指标：极端高(如&gt;1.2)常对应阶段底、极端低(&lt;0.6)常对应过热。三条线对应沪深300/中证500/科创50ETF期权，可点击聚焦；PCR=1为参考线。</span></span></h2>
     <div class="desc">沪深300ETF / 中证500ETF / 科创50ETF 期权认沽认购成交量比，数据来源：上交所每日统计｜<b id="rangeP"></b><br>交互：点击图线或图例聚焦该品种（其余变淡），再次点击或点击空白处恢复；PCR=1 为参考线不参与聚焦</div>
     <div id="chartPcr" class="chart"></div>
   </div>
@@ -190,10 +214,9 @@ function indBarOption(title, rows, legendColors) {
   const chg5 = rows.map(r=>r.chg5).reverse();
   const chg10 = rows.map(r=>r.chg10).reverse();
   return {
-    title: { text:title, left:'center', textStyle:{ fontSize:13, color:'#4a5568' } },
     tooltip: baseTooltip(),
-    legend: { data:['5日宽度周变化','10日宽度周变化'], top:22, textStyle:{ fontSize:11 } },
-    grid: { left:110, right:40, top:52, bottom:24 },
+    legend: { data:['5日宽度周变化','10日宽度周变化'], top:0, textStyle:{ fontSize:11 } },
+    grid: { left:110, right:40, top:34, bottom:24 },
     xAxis: { type:'value', axisLabel:{ formatter:'{value}pp' } },
     yAxis: { type:'category', data:names, axisLabel:{ fontSize:11.5 } },
     series: [
