@@ -38,3 +38,16 @@ if r.returncode != 0:
     print(f"[失败] 生成Dashboard 退出码 {r.returncode}", flush=True)
     sys.exit(1)
 print("\n全部完成 -> output/dashboard.html", flush=True)
+
+# 可选：提交并推送 GitHub Pages（需已配置 SSH 免密；无变更或推送失败不阻断）
+print(f"\n{'='*20} 推送GitHub Pages(可选) {'='*20}", flush=True)
+try:
+    subprocess.run(["git", "add", "-A"], cwd=BASE_DIR, check=False)
+    subprocess.run(["git", "commit", "-m", "auto: 每日数据更新", "-m", "update.py 自动提交"], cwd=BASE_DIR, check=False)
+    r = subprocess.run(["git", "push"], cwd=BASE_DIR, timeout=300)
+    if r.returncode == 0:
+        print("[GitHub] 已推送，线上 Pages 将自动更新", flush=True)
+    else:
+        print(f"[GitHub] push 退出码 {r.returncode}（未推送，不影响本地更新）", flush=True)
+except Exception as e:
+    print(f"[GitHub] 推送跳过: {repr(e)[:120]}", flush=True)
