@@ -689,6 +689,14 @@ def run():
         fp.write(html)
     print(f"生成 {out_path}  大小 {os.path.getsize(out_path)/1024:.0f}KB")
 
+    # GitHub Pages 部署副本: docs/index.html (Pages 仅支持根目录或 /docs)
+    docs_dir = os.path.join(BASE_DIR, "docs")
+    os.makedirs(docs_dir, exist_ok=True)
+    docs_path = os.path.join(docs_dir, "index.html")
+    with open(docs_path, "w", encoding="utf-8") as fp:
+        fp.write(html)
+    print(f"生成 {docs_path}  大小 {os.path.getsize(docs_path)/1024:.0f}KB")
+
     # 抽出内联JS做语法自检 (最后一个script块已含DATA声明, 直接提取即可)
     start = html.rfind("<script>") + len("<script>")
     end = html.rfind("</script>")
