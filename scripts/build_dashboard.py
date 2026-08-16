@@ -82,25 +82,95 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   .sidenav a.active .no { color:#2b5b8f; }
   .sidenav a.backtop { margin-top:8px; border-top:1px solid #eef1f5; padding-top:9px; color:#8a94a6; }
   @media (max-width:1150px){ .sidenav { display:none; } }
+  /* 页面切换 tab */
+  .tabs { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+  .tab { padding:7px 18px; border:1px solid rgba(255,255,255,.35); background:rgba(255,255,255,.12);
+         color:#fff; border-radius:20px; font-size:13px; cursor:pointer; transition:all .15s; }
+  .tab:hover { background:rgba(255,255,255,.24); }
+  .tab.active { background:#fff; color:#1e3a5f; font-weight:600; }
+  /* 事件页：过滤与重要性色块 */
+  .filter-bar { display:flex; gap:8px; margin:6px 0 4px 14px; flex-wrap:wrap; }
+  .fbtn { padding:5px 14px; border:1px solid #dde3ec; background:#fff; color:#4a5568;
+          border-radius:14px; font-size:12px; cursor:pointer; transition:all .15s; }
+  .fbtn:hover { border-color:#2b5b8f; color:#1e3a5f; }
+  .fbtn.active { background:#2b5b8f; border-color:#2b5b8f; color:#fff; font-weight:600; }
+  .lg { display:inline-block; width:18px; height:18px; border-radius:50%; color:#fff;
+        font-size:10px; font-weight:700; text-align:center; line-height:18px; margin:0 2px; }
+  .lg10{ background:#b71c1c; } .lg9{ background:#e54545; } .lg8{ background:#e8703a; }
+  .lg7{ background:#f2a93b; } .lg6{ background:#d4a017; } .lg5{ background:#3aa6a6; } .lg4{ background:#7a8599; }
+  /* 事件时间线 */
+  .ev-timeline { position:relative; margin:10px 0 0 14px; padding-left:22px; }
+  .ev-timeline::before { content:''; position:absolute; left:6px; top:8px; bottom:8px; width:2px;
+                         background:#e3e8f0; }
+  .ev-item { position:relative; display:flex; gap:10px; padding-bottom:14px; }
+  .ev-item::before { content:''; position:absolute; left:-22px; top:9px; width:10px; height:10px;
+                     border-radius:50%; background:#c3ccd8; border:2px solid #fff;
+                     box-shadow:0 0 0 2px #c3ccd8; }
+  .ev-item.top::before { background:#e54545; box-shadow:0 0 0 2px #e54545; }
+  .ev-date { font-size:12.5px; font-weight:700; color:#2b5b8f; width:88px; flex-shrink:0; padding-top:3px; }
+  .ev-body { flex:1; min-width:0; background:#fbfcfe; border:1px solid #eef1f5; border-radius:8px;
+             padding:8px 12px; }
+  .ev-top { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .ev-imp { color:#fff; font-size:11px; font-weight:700; min-width:20px; height:20px; padding:0 5px;
+            border-radius:10px; display:inline-flex; align-items:center; justify-content:center; }
+  .ev-name { font-size:13.5px; font-weight:600; color:#2b3245; }
+  .ev-cat { font-size:11px; color:#6b7689; background:#f0f3f8; padding:1px 7px; border-radius:9px; }
+  .ev-cert { font-size:12px; }
+  .ev-impact { font-size:12px; color:#8a94a6; margin-top:4px; }
+  /* 重点事件解读 */
+  .deep-item { background:#fbfcfe; border:1px solid #eef1f5; border-left:3px solid #2b5b8f;
+               border-radius:8px; padding:10px 14px; margin:0 0 12px 14px; }
+  .deep-head { font-size:13.5px; font-weight:600; color:#1e3a5f; margin-bottom:6px; }
+  .deep-imp { display:inline-block; background:#e54545; color:#fff; font-size:11px; font-weight:700;
+              padding:1px 8px; border-radius:9px; margin-right:8px; vertical-align:1px; }
+  .deep-item ul { margin:0; padding-left:20px; }
+  .deep-item li { font-size:12.5px; color:#4a5568; line-height:1.75; margin-bottom:2px; }
+  /* 板块映射与核心个股 */
+  .sec-item { background:#fbfcfe; border:1px solid #eef1f5; border-radius:8px; padding:10px 14px;
+              margin:0 0 12px 14px; }
+  .sec-theme { font-size:14px; font-weight:700; color:#1e3a5f; margin-bottom:6px;
+               border-left:3px solid #f2a93b; padding-left:8px; }
+  .sec-row { font-size:12.5px; color:#4a5568; line-height:1.7; }
+  .sec-row b { color:#2b5b8f; }
+  .ev-note { font-size:11.5px; color:#9aa6ba; margin:4px 0 0 14px; }
+  /* 风险提示 */
+  .risk-list { margin:4px 0 0 34px; }
+  .risk-list li { font-size:12.5px; color:#4a5568; line-height:1.8; margin-bottom:4px; }
 </style>
 </head>
 <body id="top">
 <div class="wrap">
   <div class="layout">
     <aside class="sidenav">
-      <div class="nav-title">目录导航</div>
-      <a href="#sec1"><span class="no">①</span>中长期宽度</a>
-      <a href="#sec2"><span class="no">②</span>短期宽度</a>
-      <a href="#sec3"><span class="no">③</span>行业轮动</a>
-      <a href="#sec4"><span class="no">④</span>关注板块</a>
-      <a href="#sec5"><span class="no">⑤</span>期权PCR</a>
-      <a href="#top" class="backtop"><span class="no">↑</span>回到顶部</a>
+      <div id="navMarket">
+        <div class="nav-title">目录导航</div>
+        <a href="#sec1"><span class="no">①</span>中长期宽度</a>
+        <a href="#sec2"><span class="no">②</span>短期宽度</a>
+        <a href="#sec3"><span class="no">③</span>行业轮动</a>
+        <a href="#sec4"><span class="no">④</span>关注板块</a>
+        <a href="#sec5"><span class="no">⑤</span>期权PCR</a>
+        <a href="#top" class="backtop"><span class="no">↑</span>回到顶部</a>
+      </div>
+      <div id="navEvents" style="display:none">
+        <div class="nav-title">事件时间表</div>
+        <a href="#ev0"><span class="no">📅</span>事件时间线</a>
+        <a href="#ev1"><span class="no">📖</span>重点解读</a>
+        <a href="#ev2"><span class="no">🗺️</span>板块映射</a>
+        <a href="#ev3"><span class="no">⚠️</span>风险提示</a>
+        <a href="#top" class="backtop"><span class="no">↑</span>回到顶部</a>
+      </div>
     </aside>
     <div class="main">
   <header>
     <h1>A股市场情绪监控 Dashboard</h1>
     <div class="meta" id="metaLine"></div>
+    <div class="tabs">
+      <button class="tab active" data-tab="market">📊 市场看板</button>
+      <button class="tab" data-tab="events">📅 事件时间表</button>
+    </div>
   </header>
+
+  <div id="pageMarket" class="page">
 
   <div class="card" id="sec1">
     <h2>中长期市场宽度 &amp; 全市场平均股价<span class="qmark">?<span class="qtip">左轴三条线 = 站上20/50/120日均线的股票占比(%)。三线呈"20&gt;50&gt;120"阶梯且都&gt;60%为理想多头；若20高但120低(如当前)则是"短期反弹、长期套牢重"结构。右轴为全市场平均股价(前复权)。三线全&gt;80%弹过热警示、全&lt;20%弹超卖提示。</span></span></h2>
@@ -151,6 +221,36 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     · 期权 PCR = 认沽成交量 ÷ 认购成交量。<span class="src">来源：上海证券交易所官网每日统计。</span><br>
     · 数据区间：2025-01-01 起（板块模块为近半个月），更新于 <span id="updatedAt"></span>。本页面仅供市场观察，不构成投资建议。
   </footer>
+  </div>
+
+  <div id="pageEvents" class="page" style="display:none">
+    <div class="card" id="ev0">
+      <h2>未来2月重大事件时间线（2026-08-16 ~ 10-16）<span class="qmark">?<span class="qtip">按时间顺序排列影响股市的 52 个事件。左侧数字徽章=重要性等级(1-10，越大越重要)，颜色分级：深红=10、红=9、橙红=8、橙=7、金黄=6、青蓝=5、灰=4。可按"全部 / ≥7重要 / ≥9核心"过滤。确定性：✅已确认 🔶预计 🔁派生。</span></span></h2>
+      <div class="desc">重要性颜色：<span class="lg lg10">10</span><span class="lg lg9">9</span><span class="lg lg8">8</span><span class="lg lg7">7</span><span class="lg lg6">6</span><span class="lg lg5">5</span><span class="lg lg4">4</span> ｜ 确定性：✅已确认　🔶预计　🔁派生</div>
+      <div class="filter-bar">
+        <button class="fbtn active" data-min="0">全部事件</button>
+        <button class="fbtn" data-min="7">≥7 重要</button>
+        <button class="fbtn" data-min="9">≥9 核心</button>
+      </div>
+      <div class="ev-timeline" id="evTimeline"></div>
+    </div>
+    <div class="card" id="ev1">
+      <h2>重点事件解读<span class="qmark">?<span class="qtip">10 个重点事件的详细解读：每条含催化逻辑、影响路径与跟踪要点，重要性标注在标题前。用于理解事件"为什么重要"及事件落地前后的板块交易逻辑（防"买预期卖事实"）。</span></span></h2>
+      <div class="desc">来自文档"重点事件详解"：催化逻辑 · 影响路径 · 跟踪要点</div>
+      <div id="evDeep"></div>
+    </div>
+    <div class="card" id="ev2">
+      <h2>事件 → 板块映射与核心个股<span class="qmark">?<span class="qtip">把时间线事件映射到 7 条投资主线：每条含催化事件、受益板块与代表性核心个股。核心个股仅为板块代表性标的、非推荐买入，用于定位行情发起点与跟踪对象。</span></span></h2>
+      <div class="desc">主线 → 催化事件 → 受益板块 → 核心个股（代表性标的，仅供研究参考）</div>
+      <div id="evSectors"></div>
+    </div>
+    <div class="card" id="ev3">
+      <h2>风险提示与用法建议<span class="qmark">?<span class="qtip">使用事件日历的 7 条风控要点：确定性分级、"买预期卖事实"、数据驱动锚点、解禁≠减持、三季报+解禁叠加、长假效应等。交易决策前先过一遍本条。</span></span></h2>
+      <div class="desc">事件日历的使用边界与风控要点（非投资建议）</div>
+      <div id="evRisks"></div>
+    </div>
+  </div>
+
     </div>
   </div>
 </div>
@@ -463,21 +563,88 @@ function indBarOption(title, rows, legendColors) {
   }
 })();
 
-// 侧边导航 scrollspy：滚动时高亮当前可视模块
-(function(){
-  const links = Array.from(document.querySelectorAll('.sidenav a[href^="#sec"]'));
+// 侧边导航 scrollspy：滚动时高亮当前可视模块（市场页/事件页各一套，隐藏页不参与）
+function bindScrollspy(sel){
+  const links = Array.from(document.querySelectorAll(sel));
   const ids = links.map(a=>a.getAttribute('href').slice(1));
   function onScroll(){
     const y = window.scrollY + 140;
     let current = ids[0];
     ids.forEach(id=>{
       const el = document.getElementById(id);
-      if (el && el.offsetTop <= y) current = id;
+      if (el && el.offsetTop <= y && el.offsetParent !== null) current = id;
     });
     links.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+current));
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+}
+bindScrollspy('.sidenav a[href^="#sec"]');
+bindScrollspy('.sidenav a[href^="#ev"]');
+
+// ---- 页面切换（市场看板 / 事件时间表）----
+function switchPage(name){
+  document.querySelectorAll('.page').forEach(p=>{ p.style.display = (p.id === 'page'+name) ? 'block' : 'none'; });
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab === name));
+  document.getElementById('navMarket').style.display = (name === 'market') ? 'block' : 'none';
+  document.getElementById('navEvents').style.display = (name === 'events') ? 'block' : 'none';
+  window.scrollTo(0,0);
+  document.querySelectorAll('.chart,.chart-tall').forEach(el=>{
+    const inst = echarts.getInstanceByDom(el);
+    if (inst) inst.resize();
+  });
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>switchPage(t.dataset.tab)));
+
+// ---- 事件页渲染 ----
+(function(){
+  const ev = DATA.events_page;
+  function impColor(imp){
+    if (imp>=10) return '#b71c1c';
+    if (imp>=9) return '#e54545';
+    if (imp>=8) return '#e8703a';
+    if (imp>=7) return '#f2a93b';
+    if (imp>=6) return '#d4a017';
+    if (imp>=5) return '#3aa6a6';
+    return '#7a8599';
+  }
+  const cert = ev.certainty_map;
+  function renderTimeline(minImp){
+    const items = ev.timeline.filter(e=>e.imp>=minImp);
+    document.getElementById('evTimeline').innerHTML = items.map(e=>
+      '<div class="ev-item' + (e.imp>=9?' top':'') + '">' +
+        '<div class="ev-date">' + e.date + '</div>' +
+        '<div class="ev-body">' +
+          '<div class="ev-top">' +
+            '<span class="ev-imp" style="background:' + impColor(e.imp) + '" title="重要性 ' + e.imp + '/10">' + e.imp + '</span>' +
+            '<span class="ev-name">' + e.event + '</span>' +
+            '<span class="ev-cat">' + e.cat + '</span>' +
+            '<span class="ev-cert" title="' + (cert[e.certainty]||'') + '">' + e.certainty + '</span>' +
+          '</div>' +
+          '<div class="ev-impact">影响：' + e.impact + '</div>' +
+        '</div>' +
+      '</div>').join('');
+  }
+  document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click', ()=>{
+    document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    renderTimeline(parseInt(b.dataset.min,10));
+  }));
+  renderTimeline(0);
+
+  document.getElementById('evDeep').innerHTML = ev.deep.map(d=>
+    '<div class="deep-item"><div class="deep-head"><span class="deep-imp">' + d.imp + '</span>' + d.title + '</div><ul>' +
+    d.points.map(p=>'<li>' + p + '</li>').join('') + '</ul></div>').join('');
+
+  document.getElementById('evSectors').innerHTML = ev.sectors.map(s=>
+    '<div class="sec-item"><div class="sec-theme">' + s.theme + '</div>' +
+    '<div class="sec-row"><b>催化事件：</b>' + s.events + '</div>' +
+    '<div class="sec-row"><b>受益板块：</b>' + s.sectors + '</div>' +
+    '<div class="sec-row"><b>核心个股：</b>' + s.stocks + '</div></div>').join('') +
+    '<div class="ev-note">核心个股仅为板块代表性标的，仅供研究参考，不构成投资建议。</div>';
+
+  document.getElementById('evRisks').innerHTML =
+    '<ol class="risk-list">' + ev.risks.map(r=>'<li>' + r + '</li>').join('') + '</ol>';
 })();
 
 window.addEventListener('resize', ()=>{
@@ -496,6 +663,10 @@ def run():
     data_path = os.path.join(OUT_DIR, "dashboard_data.json")
     with open(data_path, "r", encoding="utf-8") as fp:
         data = json.load(fp)
+
+    events_path = os.path.join(DATA_DIR, "events.json")
+    with open(events_path, "r", encoding="utf-8") as fp:
+        data["events_page"] = json.load(fp)
 
     echarts_path = os.path.join(OUT_DIR, "echarts.min.js")
     with open(echarts_path, "r", encoding="utf-8") as fp:
