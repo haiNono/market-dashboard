@@ -584,20 +584,28 @@ bindScrollspy('.sidenav a[href^="#ev"]');
 
 // ---- 页面切换（市场看板 / 事件时间表）----
 function switchPage(name){
-  document.querySelectorAll('.page').forEach(p=>{ p.style.display = (p.id === 'page'+name) ? 'block' : 'none'; });
+  document.querySelectorAll('.page').forEach(p=>{ p.style.display = (p.id.toLowerCase() === 'page'+name) ? 'block' : 'none'; });
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab === name));
   document.getElementById('navMarket').style.display = (name === 'market') ? 'block' : 'none';
   document.getElementById('navEvents').style.display = (name === 'events') ? 'block' : 'none';
   window.scrollTo(0,0);
-  document.querySelectorAll('.chart,.chart-tall').forEach(el=>{
-    const inst = echarts.getInstanceByDom(el);
-    if (inst) inst.resize();
-  });
+  // 只 resize 当前可见页内的图表：对 display:none 容器 resize 会把 ECharts 画布压成 0 宽，
+  // 切回时图表会空白。用 rAF 延迟到布局稳定后再 resize。
+  const pageEl = document.getElementById('page' + name);
+  if (typeof echarts !== 'undefined') {
+    requestAnimationFrame(function(){
+      pageEl.querySelectorAll('.chart,.chart-tall').forEach(function(el){
+        const inst = echarts.getInstanceByDom(el);
+        if (inst) inst.resize();
+      });
+    });
+  }
 }
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>switchPage(t.dataset.tab)));
 
 // ---- 事件页渲染 ----
 (function(){
+  try {
   const ev = DATA.events_page;
   function impColor(imp){
     if (imp>=10) return '#b71c1c';
@@ -645,6 +653,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
 
   document.getElementById('evRisks').innerHTML =
     '<ol class="risk-list">' + ev.risks.map(r=>'<li>' + r + '</li>').join('') + '</ol>';
+  } catch(e) { console.error('事件页渲染失败:', e); }
 })();
 
 window.addEventListener('resize', ()=>{
