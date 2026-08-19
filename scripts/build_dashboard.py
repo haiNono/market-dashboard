@@ -286,13 +286,13 @@ function breadthAlert(vals) {
   const color = allHigh ? '#e54545' : '#18a058';
   const text = allHigh ? '全部宽度 > 80%：市场过热警示' : '全部宽度 < 20%：市场超卖提示';
   return [ {
-    type:'group', left:'center', top:50,
+    type:'group', right:16, top:12,
     children:[
-      { type:'rect', shape:{ width:400, height:52, r:8 },
-        style:{ fill: allHigh ? 'rgba(229,69,69,.10)' : 'rgba(24,160,88,.10)',
-                stroke:color, lineWidth:1.5 } },
-      { type:'text', left:200, top:26,
-        style:{ text:text, fontSize:20, fontWeight:'bold', fill:color,
+      { type:'rect', shape:{ width:220, height:24, r:4 },
+        style:{ fill: allHigh ? 'rgba(229,69,69,.08)' : 'rgba(24,160,88,.08)',
+                stroke:color, lineWidth:1 } },
+      { type:'text', left:110, top:12,
+        style:{ text:text, fontSize:12, fontWeight:'bold', fill:color,
                 textAlign:'center', textVerticalAlign:'middle' } }
     ]
   } ];
