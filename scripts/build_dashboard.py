@@ -3,10 +3,41 @@
 import os
 import json
 import base64
+import calendar
+import re
+from datetime import date
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 OUT_DIR = os.path.join(BASE_DIR, "output")
+
+
+def parse_event_date(s):
+    """解析事件日期字符串 -> date(2026, m, d)，返回代表事件窗口结束的日期。
+    例: 8/19 -> 8-19 | 9/9–10 -> 9-10 | 10月（全月）-> 10-31 | 9月底 -> 9-30 | 10月中旬 -> 10-15
+    无法解析返回 None（调用方保留该事件）。"""
+    m = re.match(r'(\d{1,2})/(\d{1,2})', s)
+    if m:
+        month, day = int(m.group(1)), int(m.group(2))
+        mr = re.search(r'[–-](\d{1,2})', s)  # 区间结束日，如 9/9–10
+        if mr:
+            day = max(day, int(mr.group(1)))
+        return date(2026, month, day)
+    mm = re.search(r'(\d{1,2})月', s)
+    if mm:
+        month = int(mm.group(1))
+        if '月底' in s:
+            day = 30
+        elif '下旬' in s:
+            day = 25
+        elif '中旬' in s:
+            day = 15
+        elif '上旬' in s:
+            day = 5
+        else:  # 全月/待定 → 月末
+            day = calendar.monthrange(2026, month)[1]
+        return date(2026, month, day)
+    return None
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -672,7 +703,19 @@ def run():
 
     events_path = os.path.join(DATA_DIR, "events.json")
     with open(events_path, "r", encoding="utf-8") as fp:
-        data["events_page"] = json.load(fp)
+        events = json.load(fp)
+
+    # 过滤已发生事件：事件窗口结束日 < 今天 的从时间线移除（events.json 保留完整快照）
+    today = date.today()
+    before = len(events.get("timeline", []))
+    events["timeline"] = [
+        e for e in events.get("timeline", [])
+        if (d := parse_event_date(e.get("date", ""))) is None or d >= today
+    ]
+    removed = before - len(events["timeline"])
+    if removed:
+        print(f"[事件过滤] 移除已发生事件 {removed} 条（共 {before} -> {len(events['timeline'])}）")
+    data["events_page"] = events
 
     echarts_path = os.path.join(OUT_DIR, "echarts.min.js")
     with open(echarts_path, "r", encoding="utf-8") as fp:
