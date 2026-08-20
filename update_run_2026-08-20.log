@@ -1,0 +1,133 @@
+
+==================== 增量拉取全A日线 ====================
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:00<00:02,  7.15it/s] 12%|█▏        | 2/17 [00:00<00:02,  6.20it/s] 18%|█▊        | 3/17 [00:00<00:02,  6.16it/s] 24%|██▎       | 4/17 [00:00<00:02,  6.14it/s] 29%|██▉       | 5/17 [00:00<00:01,  6.22it/s] 35%|███▌      | 6/17 [00:00<00:01,  6.33it/s] 41%|████      | 7/17 [00:01<00:01,  6.44it/s] 47%|████▋     | 8/17 [00:01<00:01,  6.67it/s] 53%|█████▎    | 9/17 [00:01<00:01,  6.51it/s] 59%|█████▉    | 10/17 [00:01<00:01,  6.44it/s] 65%|██████▍   | 11/17 [00:01<00:00,  6.46it/s] 71%|███████   | 12/17 [00:01<00:00,  6.32it/s] 76%|███████▋  | 13/17 [00:02<00:00,  6.26it/s] 82%|████████▏ | 14/17 [00:02<00:00,  6.36it/s] 88%|████████▊ | 15/17 [00:02<00:00,  5.45it/s] 94%|█████████▍| 16/17 [00:02<00:00,  5.78it/s]100%|██████████| 17/17 [00:02<00:00,  6.07it/s]                                               股票池: 5342 只 (剔除ST/退市/B股)
+进度 200/5342  成功200 失败0  用时45s 预计剩余1149s
+进度 400/5342  成功400 失败0  用时83s 预计剩余1022s
+进度 600/5342  成功600 失败0  用时111s 预计剩余879s
+进度 800/5342  成功800 失败0  用时142s 预计剩余808s
+进度 1000/5342  成功1000 失败0  用时171s 预计剩余743s
+进度 1200/5342  成功1200 失败0  用时206s 预计剩余712s
+进度 1400/5342  成功1400 失败0  用时236s 预计剩余664s
+进度 1600/5342  成功1600 失败0  用时265s 预计剩余620s
+进度 1800/5342  成功1800 失败0  用时292s 预计剩余575s
+进度 2000/5342  成功2000 失败0  用时317s 预计剩余530s
+进度 2200/5342  成功2200 失败0  用时342s 预计剩余488s
+进度 2400/5342  成功2400 失败0  用时379s 预计剩余464s
+进度 2600/5342  成功2600 失败0  用时403s 预计剩余425s
+进度 2800/5342  成功2800 失败0  用时423s 预计剩余384s
+进度 3000/5342  成功3000 失败0  用时468s 预计剩余365s
+进度 3200/5342  成功3200 失败0  用时508s 预计剩余340s
+进度 3400/5342  成功3400 失败0  用时550s 预计剩余314s
+进度 3600/5342  成功3600 失败0  用时578s 预计剩余280s
+进度 3800/5342  成功3800 失败0  用时606s 预计剩余246s
+进度 4000/5342  成功4000 失败0  用时648s 预计剩余217s
+进度 4200/5342  成功4200 失败0  用时680s 预计剩余185s
+进度 4400/5342  成功4400 失败0  用时707s 预计剩余151s
+进度 4600/5342  成功4600 失败0  用时730s 预计剩余118s
+进度 4800/5342  成功4800 失败0  用时752s 预计剩余85s
+进度 5000/5342  成功5000 失败0  用时772s 预计剩余53s
+进度 5200/5342  成功5199 失败1  用时792s 预计剩余22s
+进度 5342/5342  成功5341 失败1  用时807s 预计剩余0s
+完成: 成功5341 失败1
+
+==================== 更新板块/PCR/申万成分 ====================
+=== 1. THS板块指数 ===
+  0%|          | 0/1 [00:00<?, ?it/s]                                     板块[半导体芯片 <- THS 半导体] OK 28行
+  0%|          | 0/39 [00:00<?, ?it/s]  5%|▌         | 2/39 [00:00<00:03, 11.29it/s] 10%|█         | 4/39 [00:00<00:04,  7.58it/s] 15%|█▌        | 6/39 [00:00<00:04,  7.56it/s] 18%|█▊        | 7/39 [00:00<00:04,  7.56it/s] 21%|██        | 8/39 [00:01<00:05,  5.93it/s] 23%|██▎       | 9/39 [00:01<00:04,  6.33it/s] 26%|██▌       | 10/39 [00:01<00:07,  3.96it/s] 28%|██▊       | 11/39 [00:01<00:06,  4.58it/s] 33%|███▎      | 13/39 [00:02<00:04,  6.06it/s] 36%|███▌      | 14/39 [00:02<00:03,  6.63it/s] 41%|████      | 16/39 [00:02<00:02,  7.87it/s] 44%|████▎     | 17/39 [00:02<00:02,  8.23it/s] 46%|████▌     | 18/39 [00:02<00:02,  8.55it/s] 51%|█████▏    | 20/39 [00:02<00:02,  9.23it/s] 56%|█████▋    | 22/39 [00:03<00:01,  9.38it/s] 62%|██████▏   | 24/39 [00:03<00:01,  9.78it/s] 67%|██████▋   | 26/39 [00:03<00:01, 10.05it/s] 72%|███████▏  | 28/39 [00:03<00:01,  9.99it/s] 77%|███████▋  | 30/39 [00:03<00:00, 10.08it/s] 82%|████████▏ | 32/39 [00:04<00:00,  9.38it/s] 87%|████████▋ | 34/39 [00:04<00:00,  9.58it/s] 92%|█████████▏| 36/39 [00:04<00:00,  9.81it/s] 95%|█████████▍| 37/39 [00:04<00:00,  9.79it/s] 97%|█████████▋| 38/39 [00:04<00:00,  9.62it/s]                                                 0%|          | 0/1 [00:00<?, ?it/s]                                     板块[算力租赁 <- THS 算力租赁] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]                                     板块[云服务器 <- THS 云计算] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.34it/s]                                             板块[端侧 <- THS 消费电子] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.91it/s]                                             板块[电力 <- THS 电力] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]                                     板块[光通信 <- THS 共封装光学(CPO)] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.81it/s]                                             板块[券商 <- THS 证券] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.85it/s]                                             板块[传媒 <- THS 文化传媒] OK 28行
+=== 2. 申万三级成分(半导体材料/设备) ===
+申万三级[半导体材料 <- 850813] 成分26只
+申万三级[半导体设备 <- 850818] 成分26只
+=== 3. 申万二级全行业成分 ===
+申万二级成分进度 20/123
+申万二级成分进度 40/123
+申万二级成分进度 60/123
+申万二级成分进度 80/123
+申万二级成分进度 100/123
+申万二级成分进度 120/123
+申万二级成分总数 5170 条, 行业数 123
+=== 4. 期权PCR ===
+PCR交易日数: 638
+PCR进度 50/638
+PCR进度 100/638
+PCR进度 150/638
+PCR进度 200/638
+PCR进度 250/638
+PCR进度 300/638
+PCR进度 350/638
+PCR进度 400/638
+PCR进度 450/638
+PCR进度 500/638
+PCR进度 550/638
+PCR进度 600/638
+PCR[2026-08-20]失败 KeyError("None of [Index(['合约标的代码', '合约标的名称', '合约数量', '总成交额'
+PCR进度 638/638
+PCR记录 3185 条
+全部辅助数据完成
+
+==================== 指标计算 ====================
+kline文件 5341 个
+  加载 1000/5341
+  加载 2000/5341
+  加载 3000/5341
+  加载 4000/5341
+  加载 5000/5341
+透视收盘价矩阵...
+矩阵: 638 交易日 x 5341 股票
+  MA5 宽度完成
+  MA10 宽度完成
+  MA20 宽度完成
+  MA50 宽度完成
+  MA120 宽度完成
+行业宽度: 123个行业, 最新日2026-08-20 对比基准2026-08-13
+等权指数[半导体材料] 29日 成分26只
+等权指数[半导体设备] 29日 成分26只
+输出 e:\EProjects\workspace\market_dashboard\output\dashboard_data.json
+宽度区间: 2025-01-02 ~ 2026-08-20, 396交易日
+               b5    b10    b20    b50   b120  avg_price  stock_cnt
+date                                                               
+2026-08-18  57.29  62.95  81.27  58.43  24.01      30.39       5333
+2026-08-19  13.32  17.88  50.38  39.20  17.04      28.65       5334
+2026-08-20  32.35  32.69  58.71  47.41  19.94      28.99       5334
+
+==================== 生成Dashboard ====================
+[事件过滤] 移除已发生事件 1 条（共 52 -> 51）
+生成 e:\EProjects\workspace\market_dashboard\output\dashboard.html  大小 1130KB
+生成 e:\EProjects\workspace\market_dashboard\docs\index.html  大小 1130KB
+JS自检文件 e:\EProjects\workspace\market_dashboard\output\_check.js
+
+==================== 同步资料库事件文档 ====================
+CLIENT_MODE_NO_TOKEN: agent 环境需设置 EVENT_TOKEN 环境变量
+[警告] 事件文档同步失败(退出码 2)，沿用上次事件数据
+
+==================== 重新生成Dashboard(含事件页) ====================
+[事件过滤] 移除已发生事件 1 条（共 52 -> 51）
+生成 e:\EProjects\workspace\market_dashboard\output\dashboard.html  大小 1130KB
+生成 e:\EProjects\workspace\market_dashboard\docs\index.html  大小 1130KB
+JS自检文件 e:\EProjects\workspace\market_dashboard\output\_check.js
+
+全部完成 -> output/dashboard.html
+
+==================== 推送GitHub Pages(可选) ====================
+warning: in the working copy of 'data/option_pcr.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_云服务器.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_传媒.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_光通信.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_券商.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_半导体芯片.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_电力.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_端侧.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_算力租赁.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sw2_components.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sw3_半导体材料.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sw3_半导体设备.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/index.html', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'output/dashboard.html', CRLF will be replaced by LF the next time Git touches it
+no/market-dashboard.git
+   1dcd7a9..1062d2d  main -> main
+[GitHub] 已推送，线上 Pages 将自动更新
