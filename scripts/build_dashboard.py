@@ -249,28 +249,28 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   </div>
 
   <div class="card" id="sec6">
-    <h2>Gavin Baker AI 五大指标监控<span class="qmark">?<span class="qtip">Gavin Baker(Atreides Management CIO、英伟达最早机构投资人)判断 AI 超级周期是否延续的五大监控指标：①Watt 电力 ②Wafer 晶圆 ③Token 推理量 ④算力资本开支/现金流 ⑤GPU 供需价格。核心逻辑：AI 是受物理约束的超级周期，电力/晶圆/算力是硬瓶颈；只要底层指标持续上行，周期未结束。各图可点击图例切换显示。</span></span></h2>
-    <div class="desc">数据源：台积电官网 / 英伟达财报 / 美股财报 / 国家能源局 / 伯恩斯坦研报。低频数据(月度/季度)，更新于 <span id="aiUpdated"></span></div>
+    <h2>Gavin Baker AI 五大指标监控<span class="qmark">?<span class="qtip">Gavin Baker(Atreides Management CIO、英伟达最早机构投资人)在《Invest Like the Best》2026-08-04 访谈中明确追踪的五大量化指标：①GPU可用性 ②GPU租赁价格 ③DRAM现货价 ④Token总增长量 ⑤超大规模云厂商经营现金流。他说"在硅谷两个月，没听到一个负面量化指标——GPU可用性、GPU租赁价格、DRAM现货价、token增长，全部在加速"。核心判断：AI 是受物理约束的超级周期，只要这五项持续上行，周期未结束。</span></span></h2>
+    <div class="desc">数据源：SemiAnalysis GPU价格指数 / 英伟达财报 / CFM闪存市场 / OpenAI·Anthropic披露 / 美股财报·东吴证券。低频数据(月度/季度)，更新于 <span id="aiUpdated"></span></div>
     <div class="metric-grid">
       <div class="subcard">
-        <div class="subtitle">① Wafer 晶圆 · 台积电月度营收<span class="qmark">?<span class="qtip">Gavin 最看重的一线指标（"如果只能盯一个指标，盯台积电产能决策"）。月度合并营收(百万新台币)反映先进制程产能与 AI 芯片拉货强度，柱=营收、线=同比% 。2026-07 达 4675.8 亿创历史新高(同比+44.7%)。</span></span></div>
-        <div id="aiTsmc" class="chart" style="height:270px"></div>
+        <div class="subtitle">① GPU 可用性 · 英伟达数据中心营收<span class="qmark">?<span class="qtip">GPU 可用性无公开统计，Gavin 2026-07 原话"GPU 可用性仍然极度紧缺"（H100/H200 现货抢购、交付排期至 2027 年）。以英伟达数据中心季度营收作为算力景气的最佳公开代理：2026Q1 达 752 亿美元。</span></span></div>
+        <div id="aiGpuAvail" class="chart" style="height:270px"></div>
       </div>
       <div class="subcard">
-        <div class="subtitle">② Watt 电力 · 中国全社会用电量同比<span class="qmark">?<span class="qtip">AI 算力的物理底座是电力。全社会用电量月度同比增速反映整体电力需求强度——其中互联网数据中心用电同比+40%以上，远超大盘增速。2026-07 单月 10400 亿千瓦时创历史新高。</span></span></div>
-        <div id="aiElectricity" class="chart" style="height:270px"></div>
+        <div class="subtitle">② GPU 租赁价格 · H100 美元/GPU时<span class="qmark">?<span class="qtip">SemiAnalysis H100 租赁价格指数（Gavin 核心指标之一）。一年期合约 2025-10 $1.70/时 → 2026-03 $2.35（+40%，Gavin 原话"6个月涨了50-60%"）；2026-07 按需中位约 $3.0。折线上升=供需紧张。</span></span></div>
+        <div id="aiGpuRental" class="chart" style="height:270px"></div>
       </div>
       <div class="subcard">
-        <div class="subtitle">③ Token 需求 · 英伟达数据中心季度营收<span class="qmark">?<span class="qtip">Gavin 的"Token 推理量"无公开序列，以英伟达数据中心季度营收作为算力需求强度的最佳公开代理。FY25→FY27 持续加速，2026Q1 达 752 亿美元(同比+91%)。</span></span></div>
-        <div id="aiNvidia" class="chart" style="height:270px"></div>
+        <div class="subtitle">③ DRAM 现货价 · 服务器 DDR5 64GB RDIMM<span class="qmark">?<span class="qtip">Gavin 原话"DRAM 现货价格本月仍在涨"。服务器 64GB RDIMM 现货：2026-07 $1380 → 2026-08 $1590(+15%)；某规格 DRAM 现货 2025-11→2026-01 两月暴涨 178%，印证存储/算力供给吃紧。</span></span></div>
+        <div id="aiDram" class="chart" style="height:270px"></div>
       </div>
       <div class="subcard">
-        <div class="subtitle">④ 算力资本开支 · 四大云厂商季度 Capex<span class="qmark">?<span class="qtip">微软+谷歌+亚马逊+Meta 季度资本开支合计。Gavin 强调本轮采购方是拥有永续经营现金流的云厂商(非杠杆)，资本开支持续高增=超级周期延续。2026Q2 合计 1591 亿美元创纪录(环比+35%)。</span></span></div>
-        <div id="aiCapex" class="chart" style="height:270px"></div>
+        <div class="subtitle">④ Token 总增长量 · OpenAI+Anthropic 合计 ARR<span class="qmark">?<span class="qtip">Token 产量无官方序列，以两家头部模型公司合计年化收入(ARR)作为 token 使用总量的最佳公开代理。2025-01 约 61 亿 → 2026-08 超 1000 亿美元，18 个月增 17 倍（Anthropic 650 亿+OpenAI 400 亿）。注：Anthropic 总额法/OpenAI 净额法，口径有差异。</span></span></div>
+        <div id="aiToken" class="chart" style="height:270px"></div>
       </div>
       <div class="subcard" style="grid-column:1/-1">
-        <div class="subtitle">⑤ GPU 供需 · 服务器 DRAM 合约价<span class="qmark">?<span class="qtip">GPU 供需紧张度的价格代理。DRAM 现货价 2025-11→2026-01 两月暴涨 178% 印证供给吃紧；此处为服务器 DDR5 64GB RDIMM 合约价($/GB)，2026Q2 环比+55%、3Q26 机构预估继续上行。</span></span></div>
-        <div id="aiDram" class="chart" style="height:240px"></div>
+        <div class="subtitle">⑤ 云厂商经营现金流 · 四大厂季度合计<span class="qmark">?<span class="qtip">微软+谷歌+亚马逊+Meta 季度经营现金流合计。Gavin 核心论据：本轮 AI 采购靠经营现金流而非杠杆——OCF 占收入比从 28% 加速到 32-35%。2026Q2 合计 1718 亿美元（微软 554/亚马逊 454/谷歌 391/Meta 319）。</span></span></div>
+        <div id="aiOcf" class="chart" style="height:240px"></div>
       </div>
     </div>
   </div>
@@ -723,6 +723,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
   function render(id, d, yoy){
     const hasYoy = !!(yoy && yoy.length === d.values.length);
     const sname = d.name.split('·').pop();
+    const isLine = d.type === 'line';
     const opt = {
       tooltip: baseTooltip(),
       legend: hasYoy ? { data:[sname, '同比%'], top:0, textStyle:{fontSize:11} } : { show:false },
@@ -731,8 +732,12 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
                axisLabel:{ fontSize:10, rotate: d.dates.length>12?45:0, showMinLabel:true, showMaxLabel:true } },
       yAxis: [ { type:'value', scale:true, axisLabel:{ fontSize:10 } } ],
       dataZoom: d.dates.length>12 ? [ {type:'inside', xAxisIndex:0}, {type:'slider', xAxisIndex:0, height:14, bottom:2} ] : [],
-      series: [ { name:sname, type:'bar', barWidth:'55%', data:d.values,
-                  itemStyle:{ color:'#2b5b8f', borderRadius:[2,2,0,0] } } ]
+      series: [ isLine
+        ? { name:sname, type:'line', data:d.values, showSymbol:true, symbolSize:7, smooth:0.25,
+            lineStyle:{ width:2.2, color:'#2b5b8f' }, itemStyle:{ color:'#2b5b8f' },
+            areaStyle:{ color:'rgba(43,91,143,.12)' } }
+        : { name:sname, type:'bar', barWidth:'55%', data:d.values,
+            itemStyle:{ color:'#2b5b8f', borderRadius:[2,2,0,0] } } ]
     };
     if (hasYoy){
       opt.yAxis.push({ type:'value', name:'同比%', axisLabel:{ formatter:'{value}%', fontSize:10 }, splitLine:{show:false} });
@@ -741,11 +746,11 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
     }
     echarts.init(document.getElementById(id)).setOption(opt);
   }
-  render('aiTsmc', am.tsmc, am.tsmc.yoy);
-  render('aiElectricity', am.electricity, null);
-  render('aiNvidia', am.nvidia_dc, null);
-  render('aiCapex', am.capex, null);
+  render('aiGpuAvail', am.gpu_availability, null);
+  render('aiGpuRental', am.gpu_rental, null);
   render('aiDram', am.dram, null);
+  render('aiToken', am.token, null);
+  render('aiOcf', am.hyperscaler_ocf, null);
 })();
 
 window.addEventListener('resize', ()=>{
