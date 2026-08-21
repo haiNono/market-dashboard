@@ -167,6 +167,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   /* 风险提示 */
   .risk-list { margin:4px 0 0 34px; }
   .risk-list li { font-size:12.5px; color:#4a5568; line-height:1.8; margin-bottom:4px; }
+  /* AI 五大指标网格 */
+  .metric-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:4px; }
+  .metric-grid .subcard { padding:8px 10px; }
+  @media (max-width:900px){ .metric-grid{ grid-template-columns:1fr; } .metric-grid .subcard{ grid-column:1/-1 !important; } }
 </style>
 </head>
 <body id="top">
@@ -180,6 +184,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <a href="#sec3"><span class="no">③</span>行业轮动</a>
         <a href="#sec4"><span class="no">④</span>关注板块</a>
         <a href="#sec5"><span class="no">⑤</span>期权PCR</a>
+        <a href="#sec6"><span class="no">⑥</span>AI五大指标</a>
         <a href="#top" class="backtop"><span class="no">↑</span>回到顶部</a>
       </div>
       <div id="navEvents" style="display:none">
@@ -241,6 +246,33 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <h2>ETF期权 Put/Call Ratio（成交量口径）<span class="qmark">?<span class="qtip">认沽成交量÷认购成交量。&gt;1 认沽更活跃(情绪偏空/可能见底)，&lt;1 偏多。逆向指标：极端高(如&gt;1.2)常对应阶段底、极端低(&lt;0.6)常对应过热。三条线对应沪深300/中证500/科创50ETF期权，可点击聚焦；PCR=1为参考线。</span></span></h2>
     <div class="desc">沪深300ETF / 中证500ETF / 科创50ETF 期权认沽认购成交量比，数据来源：上交所每日统计｜<b id="rangeP"></b><br>交互：点击图线或图例聚焦该品种（其余变淡），再次点击或点击空白处恢复；PCR=1 为参考线不参与聚焦</div>
     <div id="chartPcr" class="chart"></div>
+  </div>
+
+  <div class="card" id="sec6">
+    <h2>Gavin Baker AI 五大指标监控<span class="qmark">?<span class="qtip">Gavin Baker(Atreides Management CIO、英伟达最早机构投资人)判断 AI 超级周期是否延续的五大监控指标：①Watt 电力 ②Wafer 晶圆 ③Token 推理量 ④算力资本开支/现金流 ⑤GPU 供需价格。核心逻辑：AI 是受物理约束的超级周期，电力/晶圆/算力是硬瓶颈；只要底层指标持续上行，周期未结束。各图可点击图例切换显示。</span></span></h2>
+    <div class="desc">数据源：台积电官网 / 英伟达财报 / 美股财报 / 国家能源局 / 伯恩斯坦研报。低频数据(月度/季度)，更新于 <span id="aiUpdated"></span></div>
+    <div class="metric-grid">
+      <div class="subcard">
+        <div class="subtitle">① Wafer 晶圆 · 台积电月度营收<span class="qmark">?<span class="qtip">Gavin 最看重的一线指标（"如果只能盯一个指标，盯台积电产能决策"）。月度合并营收(百万新台币)反映先进制程产能与 AI 芯片拉货强度，柱=营收、线=同比% 。2026-07 达 4675.8 亿创历史新高(同比+44.7%)。</span></span></div>
+        <div id="aiTsmc" class="chart" style="height:270px"></div>
+      </div>
+      <div class="subcard">
+        <div class="subtitle">② Watt 电力 · 中国全社会用电量同比<span class="qmark">?<span class="qtip">AI 算力的物理底座是电力。全社会用电量月度同比增速反映整体电力需求强度——其中互联网数据中心用电同比+40%以上，远超大盘增速。2026-07 单月 10400 亿千瓦时创历史新高。</span></span></div>
+        <div id="aiElectricity" class="chart" style="height:270px"></div>
+      </div>
+      <div class="subcard">
+        <div class="subtitle">③ Token 需求 · 英伟达数据中心季度营收<span class="qmark">?<span class="qtip">Gavin 的"Token 推理量"无公开序列，以英伟达数据中心季度营收作为算力需求强度的最佳公开代理。FY25→FY27 持续加速，2026Q1 达 752 亿美元(同比+91%)。</span></span></div>
+        <div id="aiNvidia" class="chart" style="height:270px"></div>
+      </div>
+      <div class="subcard">
+        <div class="subtitle">④ 算力资本开支 · 四大云厂商季度 Capex<span class="qmark">?<span class="qtip">微软+谷歌+亚马逊+Meta 季度资本开支合计。Gavin 强调本轮采购方是拥有永续经营现金流的云厂商(非杠杆)，资本开支持续高增=超级周期延续。2026Q2 合计 1591 亿美元创纪录(环比+35%)。</span></span></div>
+        <div id="aiCapex" class="chart" style="height:270px"></div>
+      </div>
+      <div class="subcard" style="grid-column:1/-1">
+        <div class="subtitle">⑤ GPU 供需 · 服务器 DRAM 合约价<span class="qmark">?<span class="qtip">GPU 供需紧张度的价格代理。DRAM 现货价 2025-11→2026-01 两月暴涨 178% 印证供给吃紧；此处为服务器 DDR5 64GB RDIMM 合约价($/GB)，2026Q2 环比+55%、3Q26 机构预估继续上行。</span></span></div>
+        <div id="aiDram" class="chart" style="height:240px"></div>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -684,6 +716,38 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
   } catch(e) { console.error('事件页渲染失败:', e); }
 })();
 
+// ---- 6. Gavin Baker AI 五大指标 ----
+(function(){
+  const am = DATA.ai_metrics.metrics;
+  document.getElementById('aiUpdated').textContent = DATA.ai_metrics.meta.updated;
+  function render(id, d, yoy){
+    const hasYoy = !!(yoy && yoy.length === d.values.length);
+    const sname = d.name.split('·').pop();
+    const opt = {
+      tooltip: baseTooltip(),
+      legend: hasYoy ? { data:[sname, '同比%'], top:0, textStyle:{fontSize:11} } : { show:false },
+      grid: { left:52, right: hasYoy?44:16, top: hasYoy?30:14, bottom: d.dates.length>12?42:34 },
+      xAxis: { type:'category', data:d.dates,
+               axisLabel:{ fontSize:10, rotate: d.dates.length>12?45:0, showMinLabel:true, showMaxLabel:true } },
+      yAxis: [ { type:'value', scale:true, axisLabel:{ fontSize:10 } } ],
+      dataZoom: d.dates.length>12 ? [ {type:'inside', xAxisIndex:0}, {type:'slider', xAxisIndex:0, height:14, bottom:2} ] : [],
+      series: [ { name:sname, type:'bar', barWidth:'55%', data:d.values,
+                  itemStyle:{ color:'#2b5b8f', borderRadius:[2,2,0,0] } } ]
+    };
+    if (hasYoy){
+      opt.yAxis.push({ type:'value', name:'同比%', axisLabel:{ formatter:'{value}%', fontSize:10 }, splitLine:{show:false} });
+      opt.series.push({ name:'同比%', type:'line', yAxisIndex:1, data:yoy, showSymbol:false, smooth:0.2,
+        lineStyle:{ width:1.5, color:'#e54545' }, itemStyle:{ color:'#e54545' } });
+    }
+    echarts.init(document.getElementById(id)).setOption(opt);
+  }
+  render('aiTsmc', am.tsmc, am.tsmc.yoy);
+  render('aiElectricity', am.electricity, null);
+  render('aiNvidia', am.nvidia_dc, null);
+  render('aiCapex', am.capex, null);
+  render('aiDram', am.dram, null);
+})();
+
 window.addEventListener('resize', ()=>{
   document.querySelectorAll('.chart,.chart-tall').forEach(el=>{
     const inst = echarts.getInstanceByDom(el);
@@ -716,6 +780,10 @@ def run():
     if removed:
         print(f"[事件过滤] 移除已发生事件 {removed} 条（共 {before} -> {len(events['timeline'])}）")
     data["events_page"] = events
+
+    metrics_path = os.path.join(DATA_DIR, "ai_metrics.json")
+    with open(metrics_path, "r", encoding="utf-8") as fp:
+        data["ai_metrics"] = json.load(fp)
 
     echarts_path = os.path.join(OUT_DIR, "echarts.min.js")
     with open(echarts_path, "r", encoding="utf-8") as fp:
