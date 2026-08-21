@@ -1,199 +1,0 @@
-
-==================== 增量拉取全A日线 ====================
-  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:00<00:02,  7.46it/s] 12%|█▏        | 2/17 [00:00<00:02,  6.61it/s] 18%|█▊        | 3/17 [00:00<00:02,  5.09it/s] 24%|██▎       | 4/17 [00:00<00:02,  5.50it/s] 29%|██▉       | 5/17 [00:00<00:02,  5.71it/s] 35%|███▌      | 6/17 [00:01<00:01,  5.92it/s] 41%|████      | 7/17 [00:01<00:01,  6.07it/s] 47%|████▋     | 8/17 [00:01<00:01,  6.41it/s] 53%|█████▎    | 9/17 [00:01<00:01,  6.65it/s] 59%|█████▉    | 10/17 [00:01<00:01,  6.50it/s] 65%|██████▍   | 11/17 [00:01<00:00,  6.40it/s] 71%|███████   | 12/17 [00:02<00:00,  5.29it/s] 76%|███████▋  | 13/17 [00:02<00:00,  5.65it/s] 82%|████████▏ | 14/17 [00:02<00:00,  5.72it/s] 88%|████████▊ | 15/17 [00:02<00:00,  5.59it/s] 94%|█████████▍| 16/17 [00:02<00:00,  4.78it/s]100%|██████████| 17/17 [00:02<00:00,  5.27it/s]                                               股票池: 5343 只 (剔除ST/退市/B股)
-[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
-[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
-[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
-[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
-#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
-#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
-#16 0x7ffe015ee279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
-#17 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#18 0x7ffe01670a11 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0a11)
-#19 0x7ffe0160a2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
-#20 0x7ffe016505f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
-#21 0x7ffe01670bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
-#22 0x7ffe015ee61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
-#23 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#24 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#25 0x7ffe0166e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
-#26 0x7ffe0160a9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
-#27 0x7ffe0161f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
-#28 0x7ffe0167c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
-#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
-#29 0x7ffe0167c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
-#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
-#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
-#16 0x7ffe015ee279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
-#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
-#17 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#18 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#19 0x7ffe0160a2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
-#20 0x7ffe016505f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
-#21 0x7ffe01670bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
-#22 0x7ffe015ee61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
-#23 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#24 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#25 0x7ffe0166e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
-#26 0x7ffe0160a9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
-#27 0x7ffe0161f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
-#28 0x7ffe0167c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
-#29 0x7ffe0167c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
-#16 0x7ffe015ee279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
-#17 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#18 0x7ffe01670a11 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0a11)
-#19 0x7ffe0160a2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
-#20 0x7ffe016505f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
-#21 0x7ffe01670bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
-#22 0x7ffe015ee61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
-#23 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#24 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#25 0x7ffe0166e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
-#26 0x7ffe0160a9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
-#27 0x7ffe0161f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
-#28 0x7ffe0167c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
-#29 0x7ffe0167c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
-#13 0x7ffe5295245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
-#14 0x7ffe52952097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
-#15 0x7ffe52951c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
-#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
-#10 0x7ffe650a4791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
-#11 0x7ffe650a44a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
-#12 0x7ffe650a4352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
-#13 0x7ffe5295245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
-#14 0x7ffe52952097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
-#15 0x7ffe52951c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
-#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
-#13 0x7ffe5295245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
-#14 0x7ffe52952097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
-#15 0x7ffe52951c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
-#16 0x7ffe015ee279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
-#17 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#18 0x7ffe01670a11 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0a11)
-#19 0x7ffe0160a2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
-#20 0x7ffe016505f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
-#21 0x7ffe01670bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
-#22 0x7ffe015ee61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
-#23 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#24 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#25 0x7ffe0166e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
-#26 0x7ffe0160a9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
-#27 0x7ffe0161f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
-#28 0x7ffe0167c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
-#29 0x7ffe0167c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
-#10 0x7ffe650a4791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
-#11 0x7ffe650a44a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
-#12 0x7ffe650a4352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
-#10 0x7ffe650a4791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
-#11 0x7ffe650a44a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
-#12 0x7ffe650a4352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
-#13 0x7ffe5295245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
-#14 0x7ffe52952097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
-#15 0x7ffe52951c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
-#10 0x7ffe650a4791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
-#11 0x7ffe650a44a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
-#12 0x7ffe650a4352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
-#0 0x7ffdc75fad32 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x158ad32)
-#1 0x7ffdc756e5a7 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x14fe5a7)
-#2 0x7ffdc74b827d (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x144827d)
-#3 0x7ffdc63be104 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34e104)
-#4 0x7ffdc63bc2b8 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34c2b8)
-#5 0x7ffdc60cf113 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x5f113)
-#6 0x7ffdc607e9b3 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xe9b3)
-#7 0x7ffdc607ea8a (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xea8a)
-#8 0x7ffdc6076785 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x6785)
-#9 0x7ffdc607cf23 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xcf23)
-[失败] 增量拉取全A日线 退出码 2147483651，终止后续步骤
-
-==================== 增量拉取全A日线 ====================
-  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:00<00:02,  6.58it/s] 12%|█▏        | 2/17 [00:00<00:02,  6.54it/s] 18%|█▊        | 3/17 [00:00<00:02,  6.54it/s] 24%|██▎       | 4/17 [00:00<00:02,  6.37it/s] 29%|██▉       | 5/17 [00:00<00:01,  6.83it/s] 35%|███▌      | 6/17 [00:00<00:01,  7.03it/s] 41%|████      | 7/17 [00:01<00:01,  6.42it/s] 47%|████▋     | 8/17 [00:01<00:01,  6.30it/s] 53%|█████▎    | 9/17 [00:01<00:01,  6.32it/s] 59%|█████▉    | 10/17 [00:01<00:01,  6.34it/s] 65%|██████▍   | 11/17 [00:01<00:00,  6.27it/s] 71%|███████   | 12/17 [00:01<00:00,  6.45it/s] 76%|███████▋  | 13/17 [00:01<00:00,  6.61it/s] 82%|████████▏ | 14/17 [00:02<00:00,  6.64it/s] 88%|████████▊ | 15/17 [00:02<00:00,  6.32it/s] 94%|█████████▍| 16/17 [00:02<00:00,  6.46it/s]100%|██████████| 17/17 [00:02<00:00,  6.68it/s]                                               股票池: 5343 只 (剔除ST/退市/B股)
-[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
-[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
-[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
-#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
-#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
-#16 0x7ffe015ee279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
-#17 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#18 0x7ffe01670a11 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0a11)
-#19 0x7ffe0160a2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
-#20 0x7ffe016505f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
-#21 0x7ffe01670bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
-#22 0x7ffe015ee61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
-#23 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#24 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#25 0x7ffe0166e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
-#26 0x7ffe0160a9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
-#27 0x7ffe0161f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
-#28 0x7ffe0167c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
-#29 0x7ffe0167c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
-#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
-#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
-#16 0x7ffe015ee279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
-#17 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#18 0x7ffe01670a11 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0a11)
-#19 0x7ffe0160a2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
-#20 0x7ffe016505f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
-#21 0x7ffe01670bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
-#22 0x7ffe015ee61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
-#23 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#24 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#25 0x7ffe0166e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
-#26 0x7ffe0160a9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
-#27 0x7ffe0161f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
-#28 0x7ffe0167c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
-#29 0x7ffe0167c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
-#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
-#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
-#16 0x7ffe015ee279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
-#17 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#18 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#19 0x7ffe0160a2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
-#20 0x7ffe016505f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
-#21 0x7ffe01670bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
-#22 0x7ffe015ee61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
-#13 0x7ffe5295245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
-#23 0x7ffe015edc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
-#14 0x7ffe52952097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
-#24 0x7ffe01672321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
-#15 0x7ffe52951c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
-#25 0x7ffe0166e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
-#26 0x7ffe0160a9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
-#27 0x7ffe0161f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
-#28 0x7ffe0167c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
-#29 0x7ffe0167c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
-#10 0x7ffe650a4791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
-#11 0x7ffe650a44a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
-#12 0x7ffe650a4352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
-#13 0x7ffe5295245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
-#14 0x7ffe52952097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
-#15 0x7ffe52951c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
-#10 0x7ffe650a4791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
-#13 0x7ffe5295245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
-#11 0x7ffe650a44a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
-#14 0x7ffe52952097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
-#12 0x7ffe650a4352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
-#15 0x7ffe52951c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
-#10 0x7ffe650a4791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
-#11 0x7ffe650a44a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
-#12 0x7ffe650a4352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
-#0 0x7ffdc75fad32 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x158ad32)
-#1 0x7ffdc756e5a7 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x14fe5a7)
-#2 0x7ffdc74b827d (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x144827d)
-#3 0x7ffdc63be104 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34e104)
-#4 0x7ffdc63bc2b8 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34c2b8)
-#5 0x7ffdc60cf113 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x5f113)
-#6 0x7ffdc607e9b3 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xe9b3)
-#7 0x7ffdc607ea8a (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xea8a)
-#8 0x7ffdc6076785 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x6785)
-#9 0x7ffdc607cf23 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xcf23)
-#0 0x7ffdc75fad32 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x158ad32)
-#1 0x7ffdc756e5a7 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x14fe5a7)
-#2 0x7ffdc74b827d (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x144827d)
-#3 0x7ffdc63be104 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34e104)
-#4 0x7ffdc63bc2b8 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34c2b8)
-#5 0x7ffdc60cf113 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x5f113)
-#6 0x7ffdc607e9b3 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xe9b3)
-#7 0x7ffdc607ea8a (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xea8a)
-#8 0x7ffdc6076785 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x6785)
-#9 0x7ffdc607cf23 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xcf23)
-[失败] 增量拉取全A日线 退出码 2147483651，终止后续步骤
