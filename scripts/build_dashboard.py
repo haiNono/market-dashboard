@@ -257,7 +257,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <div id="aiGpuAvail" class="chart" style="height:270px"></div>
       </div>
       <div class="subcard">
-        <div class="subtitle">② GPU 租赁价格 · H100 美元/GPU时<span class="qmark">?<span class="qtip">SemiAnalysis H100 租赁价格指数（Gavin 核心指标之一）。一年期合约 2025-10 $1.70/时 → 2026-03 $2.35（+40%，Gavin 原话"6个月涨了50-60%"）；2026-07 按需中位约 $3.0。折线上升=供需紧张。</span></span></div>
+        <div class="subtitle">② GPU 租赁价格 · H100 美元/GPU时（周度）<span class="qmark">?<span class="qtip">Gavin 核心指标之一，周度数据。历史段为公开研报月度锚点（Silicon Data 现货指数/SemiAnalysis 合约指数，2025-10 触底 $1.70 → 2026-03 +40% 至 $2.35）；2026-08-21 起每周五自动抓取 gputracker.dev/vast.ai 现货市场中位价追加真实周点（抓取失败自动跳过、保留上次数据）。折线上升=供需紧张。</span></span></div>
         <div id="aiGpuRental" class="chart" style="height:270px"></div>
       </div>
       <div class="subcard">

@@ -6,6 +6,7 @@
 import os
 import subprocess
 import sys
+import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS = os.path.join(BASE_DIR, "scripts")
@@ -30,6 +31,15 @@ print(f"\n{'='*20} 同步资料库事件文档 {'='*20}", flush=True)
 r = subprocess.run([PY, "-u", os.path.join(SCRIPTS, "fetch_events.py")], cwd=BASE_DIR)
 if r.returncode != 0:
     print(f"[警告] 事件文档同步失败(退出码 {r.returncode})，沿用上次事件数据", flush=True)
+
+# AI 监控数据：仅周五刷新（GPU 租赁价格周度抓取；失败不阻断，保留上次数据）
+if datetime.date.today().weekday() == 4:  # 4 = Friday
+    print(f"\n{'='*20} 刷新AI监控数据(周五) {'='*20}", flush=True)
+    r = subprocess.run([PY, "-u", os.path.join(SCRIPTS, "fetch_ai_metrics.py")], cwd=BASE_DIR)
+    if r.returncode != 0:
+        print(f"[警告] AI 监控数据刷新失败(退出码 {r.returncode})，保留上次数据", flush=True)
+else:
+    print(f"\n{'='*20} 跳过AI监控刷新(仅周五执行) {'='*20}", flush=True)
 
 # 事件数据同步后需重新生成 HTML（build 会把 events.json 内联进页面）
 print(f"\n{'='*20} 重新生成Dashboard(含事件页) {'='*20}", flush=True)
