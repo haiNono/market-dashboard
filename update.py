@@ -6,6 +6,7 @@
 import os
 import subprocess
 import sys
+import time
 import datetime
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -24,6 +25,11 @@ STEPS = [
 for name, script in STEPS:
     print(f"\n{'='*20} {name} {'='*20}", flush=True)
     r = subprocess.run([PY, "-u", script], cwd=BASE_DIR)
+    if r.returncode != 0:
+        # 偶发崩溃容错：fetch_stocks 曾出现 V8 初始化崩溃(退出码 2147483651/2)，自动重试一次
+        print(f"[重试] {name} 退出码 {r.returncode}，10 秒后自动重试一次", flush=True)
+        time.sleep(10)
+        r = subprocess.run([PY, "-u", script], cwd=BASE_DIR)
     if r.returncode != 0:
         print(f"[失败] {name} 退出码 {r.returncode}，终止后续步骤", flush=True)
         sys.exit(1)
