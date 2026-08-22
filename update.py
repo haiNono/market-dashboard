@@ -15,6 +15,7 @@ PY = sys.executable
 STEPS = [
     ("增量拉取全A日线", os.path.join(SCRIPTS, "fetch_stocks.py")),
     ("更新板块/PCR/申万成分", os.path.join(SCRIPTS, "fetch_aux.py")),
+    ("更新两融余额数据", os.path.join(SCRIPTS, "fetch_margin.py")),
     ("指标计算", os.path.join(SCRIPTS, "compute.py")),
     ("生成Dashboard", os.path.join(SCRIPTS, "build_dashboard.py")),
 ]

@@ -184,7 +184,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <a href="#sec3"><span class="no">③</span>行业轮动</a>
         <a href="#sec4"><span class="no">④</span>关注板块</a>
         <a href="#sec5"><span class="no">⑤</span>期权PCR</a>
-        <a href="#sec6"><span class="no">⑥</span>AI五大指标</a>
+        <a href="#sec6"><span class="no">⑥</span>两融余额</a>
+        <a href="#sec7"><span class="no">⑦</span>AI五大指标</a>
         <a href="#top" class="backtop"><span class="no">↑</span>回到顶部</a>
       </div>
       <div id="navEvents" style="display:none">
@@ -249,6 +250,12 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   </div>
 
   <div class="card" id="sec6">
+    <h2>两融余额与融资占比<span class="qmark">?<span class="qtip">融资融券余额反映市场杠杆资金水平。三条余额线（左轴，亿元）：合计=沪深之和、上交所、深交所；右轴=两融余额合计÷沪深总市值(%)，衡量杠杆资金相对市场体量的热度。历史经验：占比持续抬升=杠杆资金加速入场（情绪亢奋/接近顶部信号）；持续回落=去杠杆（底部区域特征）。2025-01-01 起日频。</span></span></h2>
+    <div class="desc">左轴：两融余额（亿元，融资+融券）｜右轴：两融/沪深总市值（%）｜<b id="rangeM"></b><br>数据源：沪深交易所（akshare）｜总市值=沪深交易所月度市价总值插值到日频，见问号说明</div>
+    <div id="chartMargin" class="chart chart-tall"></div>
+  </div>
+
+  <div class="card" id="sec7">
     <h2>Gavin Baker AI 五大指标监控<span class="qmark">?<span class="qtip">Gavin Baker(Atreides Management CIO、英伟达最早机构投资人)在《Invest Like the Best》2026-08-04 访谈中明确追踪的五大量化指标：①GPU可用性 ②GPU租赁价格 ③DRAM现货价 ④Token总增长量 ⑤超大规模云厂商经营现金流。他说"在硅谷两个月，没听到一个负面量化指标——GPU可用性、GPU租赁价格、DRAM现货价、token增长，全部在加速"。核心判断：AI 是受物理约束的超级周期，只要这五项持续上行，周期未结束。</span></span></h2>
     <div class="desc">数据源：SemiAnalysis GPU价格指数 / 英伟达财报 / CFM闪存市场 / OpenAI·Anthropic披露 / 美股财报·东吴证券。低频数据(月度/季度)，更新于 <span id="aiUpdated"></span></div>
     <div class="metric-grid">
@@ -753,6 +760,37 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
   render('aiOcf', am.hyperscaler_ocf, null);
 })();
 
+// ---- 6. 两融余额与融资占比 ----
+(function(){
+  const m = DATA.margin;
+  if (!m) return;
+  document.getElementById('rangeM').textContent =
+    '数据区间 ' + m.dates[0] + ' ~ ' + m.dates[m.dates.length-1] + '（' + m.dates.length + '个交易日）';
+  const sTotal = lineSeries('两融余额合计', m.total, '#2b5b8f');
+  sTotal.lineStyle.width = 2.6;
+  sTotal.z = 5;
+  const sRatio = lineSeries('两融/总市值', m.ratio, '#e54545', 1);
+  sRatio.lineStyle.type = 'dashed';
+  sRatio.symbol = 'circle'; sRatio.showSymbol = false;
+  echarts.init(document.getElementById('chartMargin')).setOption({
+    tooltip: baseTooltip(),
+    legend: { data:['两融余额合计','上交所余额','深交所余额','两融/总市值'], top:0 },
+    grid: { left:56, right:52, top:36, bottom:64 },
+    xAxis: catX(m.dates),
+    yAxis: [
+      { type:'value', name:'亿元', axisLabel:{ fontSize:10 } },
+      { type:'value', name:'%', axisLabel:{ formatter:'{value}%', fontSize:10 }, splitLine:{ show:false } }
+    ],
+    dataZoom: zoomX(),
+    series: [
+      sTotal,
+      lineSeries('上交所余额', m.sh, '#f0a04b'),
+      lineSeries('深交所余额', m.sz, '#18a058'),
+      sRatio
+    ]
+  });
+})();
+
 window.addEventListener('resize', ()=>{
   document.querySelectorAll('.chart,.chart-tall').forEach(el=>{
     const inst = echarts.getInstanceByDom(el);
@@ -789,6 +827,13 @@ def run():
     metrics_path = os.path.join(DATA_DIR, "ai_metrics.json")
     with open(metrics_path, "r", encoding="utf-8") as fp:
         data["ai_metrics"] = json.load(fp)
+
+    margin_path = os.path.join(DATA_DIR, "margin.json")
+    if os.path.exists(margin_path):
+        with open(margin_path, "r", encoding="utf-8") as fp:
+            data["margin"] = json.load(fp)
+    else:
+        data["margin"] = None
 
     echarts_path = os.path.join(OUT_DIR, "echarts.min.js")
     with open(echarts_path, "r", encoding="utf-8") as fp:
