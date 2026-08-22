@@ -71,6 +71,9 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   tr:hover td { background:#f8fafc; }
   .up { color:#e54545; font-weight:600; }
   .down { color:#18a058; font-weight:600; }
+  .code { font-family:Consolas,Menlo,monospace; color:#5a6b8c; font-size:12px; }
+  .etf-table { margin-top:6px; }
+  .empty { color:#8a94a6; font-size:12.5px; padding:14px 4px; }
   .tag { display:inline-block; font-size:11px; background:#eef3fa; color:#2b5b8f;
          border-radius:3px; padding:1px 6px; margin-left:6px; }
   footer { font-size:12px; color:#8a94a6; line-height:1.9; background:#fff;
@@ -181,7 +184,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
         <div class="nav-title">目录导航</div>
         <a href="#sec1"><span class="no">①</span>中长期宽度</a>
         <a href="#sec2"><span class="no">②</span>短期宽度</a>
-        <a href="#sec3"><span class="no">③</span>行业轮动</a>
+        <a href="#sec3"><span class="no">③</span>ETF资金流</a>
         <a href="#sec4"><span class="no">④</span>关注板块</a>
         <a href="#sec5"><span class="no">⑤</span>期权PCR</a>
         <a href="#sec6"><span class="no">⑥</span>两融余额</a>
@@ -222,19 +225,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
   </div>
 
   <div class="card" id="sec3">
-    <h2>申万二级行业宽度周变化 <span class="tag" id="indTag"></span><span class="qmark">?<span class="qtip">按申万二级行业统计"站上5/10日均线"股票占比及其周变化。下方左图=本周改善最多的10行业，右图=恶化最多的10行业，用于发现资金行业流向。下方完整127行业表格可按任意列点击排序。</span></span></h2>
-    <div class="desc">按"5日宽度周变化 + 10日宽度周变化"综合排序，左：改善最多 Top10 ｜ 右：恶化最多 Bottom10<br>着色规则：红=改善(正值) 绿=恶化(负值)，深色=5日 浅色=10日｜Top10 中偶见绿柱 = 该行业该项周变化为负、但另一项大幅改善使综合分靠前</div>
+    <h2>今日主题 ETF 资金流 Top10<span class="qmark">?<span class="qtip">当日全市场约1300只ETF中，剔除宽基指数(沪深300/科创50等)、固收(国债/可转债等)、跨境(QDII)与商品实物类后，按主力净流入排序：左=流入最多10只、右=流出最多10只。主力净流入=东财口径(超大单+大单净额，亿元)，反映机构/主力资金当日板块取向。涨跌幅为当日收盘涨跌。数据为当日快照，每日更新。</span></span></h2>
+    <div class="desc">主题ETF = 全部ETF剔除宽基/固收/跨境/商品类｜左：主力资金流入 Top10 ｜ 右：主力资金流出 Top10｜<span id="etfTag"></span></div>
     <div class="dual">
       <div class="subcard">
-        <div class="subtitle">改善最多 Top10<span class="qmark">?<span class="qtip">本周改善最多(5日+10日宽度周变化综合靠前)的10个申万二级行业。红柱=该项周变化为正(改善)、绿柱=为负(恶化)；深色=5日、浅色=10日。偶见绿柱=该项短期回落但另一项大幅改善使综合靠前。</span></span></div>
-        <div id="chartIndTop" class="chart"></div>
+        <div class="subtitle">主力资金流入 Top10</div>
+        <div id="etfInflowWrap"></div>
       </div>
       <div class="subcard">
-        <div class="subtitle">恶化最多 Bottom10<span class="qmark">?<span class="qtip">本周恶化最多的10个行业。绿柱=该项为负(恶化)、红柱=为正；深色=5日、浅色=10日。用于规避资金流出行业。结合下方表格绝对值可区分"极弱回补"与"强趋势回落"。</span></span></div>
-        <div id="chartIndBottom" class="chart"></div>
+        <div class="subtitle">主力资金流出 Top10</div>
+        <div id="etfOutflowWrap"></div>
       </div>
     </div>
-    <div id="indTableWrap"></div>
   </div>
 
   <div class="card" id="sec4">
@@ -286,7 +288,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
     <b>数据口径说明</b>：<br>
     · 市场宽度 = 当日收盘价高于 N 日均线的前复权收盘价股票数 ÷ 当日有效股票数（上市满 N 个交易日），统计范围：沪深京 A 股，剔除 ST/*ST/退市股及 B 股。<span class="src">来源：新浪财经日线，前复权。</span><br>
     · 平均股价为全市场有效股票收盘价简单算术平均（前复权口径，用于趋势观察）。<br>
-    · 行业宽度按申万二级行业分类（124个），周变化 = 最近交易日比例 − 5个交易日前比例。<span class="src">来源：申万宏源官网成分。</span><br>
+    · 主题ETF资金流 = 全市场ETF剔除宽基/固收/跨境/商品类后，按当日主力净流入(东财口径，亿元)排序的 Top10 流入/流出。<span class="src">来源：东财行情中心。</span><br>
     · 板块：半导体材料/设备为申万三级成分等权自建指数；其余为同花顺概念/行业指数（端侧→消费电子，云服务器→云计算，光通信→共封装光学CPO）。<br>
     · 期权 PCR = 认沽成交量 ÷ 认购成交量。<span class="src">来源：上海证券交易所官网每日统计。</span><br>
     · 数据区间：2025-01-01 起（板块模块为近半个月），更新于 <span id="updatedAt"></span>。本页面仅供市场观察，不构成投资建议。
@@ -407,84 +409,34 @@ function lastOf(arr) { return arr[arr.length-1]; }
   });
 })();
 
-// ---- 3. 行业宽度 Top10 / Bottom10 ----
-function indBarOption(title, rows, legendColors) {
-  const names = rows.map(r=>r.industry).reverse();
-  const chg5 = rows.map(r=>r.chg5).reverse();
-  const chg10 = rows.map(r=>r.chg10).reverse();
-  return {
-    tooltip: baseTooltip(),
-    legend: { data:['5日宽度周变化','10日宽度周变化'], top:0, textStyle:{ fontSize:11 } },
-    grid: { left:110, right:40, top:34, bottom:24 },
-    xAxis: { type:'value', axisLabel:{ formatter:'{value}pp' } },
-    yAxis: { type:'category', data:names, axisLabel:{ fontSize:11.5 } },
-    series: [
-      { name:'5日宽度周变化', type:'bar', barWidth:8, itemStyle:{ color:legendColors.main },
-        data:chg5.map(v=>({ value:v,
-          itemStyle:{ color: v>=0 ? C_UP : C_DOWN } })) },
-      { name:'10日宽度周变化', type:'bar', barWidth:8, itemStyle:{ color:legendColors.light },
-        data:chg10.map(v=>({ value:v,
-          itemStyle:{ color: v>=0 ? '#f08c8c' : '#6fc79a' } })) }
-    ]
-  };
-}
+// ---- 3. 今日主题ETF资金流 Top10 ----
 (function(){
-  const ind = DATA.industry;
-  const top10 = ind.slice(0,10);
-  const bot10 = ind.slice(-10).reverse();
-  echarts.init(document.getElementById('chartIndTop'))
-    .setOption(indBarOption('改善最多 Top10', top10, { main:C_UP, light:'#f08c8c' }));
-  echarts.init(document.getElementById('chartIndBottom'))
-    .setOption(indBarOption('恶化最多 Bottom10', bot10, { main:C_DOWN, light:'#6fc79a' }));
-
-  // 表格(全部行业, 可点击表头排序)
-  const cmp = DATA.meta.industry_compare;
-  document.getElementById('indTag').textContent = cmp.latest + ' vs ' + cmp.week_ago;
-  document.getElementById('indTableWrap').innerHTML =
-    '<table id="indTable"><thead><tr>' +
-    '<th data-key="industry" class="sortable">行业</th>' +
-    '<th data-key="n_stocks" class="sortable">成分数</th>' +
-    '<th data-key="pct5" class="sortable">5日宽度%</th>' +
-    '<th data-key="pct10" class="sortable">10日宽度%</th>' +
-    '<th data-key="chg5" class="sortable">5日周变化pp</th>' +
-    '<th data-key="chg10" class="sortable">10日周变化pp</th>' +
-    '</tr></thead><tbody id="indTbody"></tbody></table>';
-
-  let sortKey = 'score', sortDir = -1;
-  const tbody = document.getElementById('indTbody');
-  function renderIndRows() {
-    const sorted = ind.slice().sort((a,b)=>{
-      const va = a[sortKey], vb = b[sortKey];
-      if (va==null && vb==null) return 0;
-      if (va==null) return 1;
-      if (vb==null) return -1;
-      if (typeof va === 'string') return sortDir * va.localeCompare(vb, 'zh');
-      return sortDir * (va - vb);
+  const ef = DATA.etf_flow;
+  if (!ef) return;
+  document.getElementById('etfTag').textContent =
+    '数据日期 ' + ef.date + '（主力净流入单位：亿元）';
+  function renderTable(wrapId, rows){
+    const wrap = document.getElementById(wrapId);
+    if (!rows || !rows.length){ wrap.innerHTML = '<div class="empty">暂无数据（数据源不可用或当日无该方向资金流）</div>'; return; }
+    let html = '<table class="etf-table"><thead><tr>' +
+      '<th>代码</th><th>名称</th><th class="num">最新价</th><th class="num">涨跌幅</th><th class="num">主力净流入(亿)</th>' +
+      '</tr></thead><tbody>';
+    rows.forEach(r=>{
+      const pctCls = r.pct>=0 ? 'up' : 'down';
+      const netCls = r.main_net>=0 ? 'up' : 'down';
+      const price = (r.price==null) ? '-' : r.price.toFixed(3);
+      const pct = (r.pct==null) ? '-' : (r.pct>=0?'+':'') + r.pct.toFixed(2) + '%';
+      const net = (r.main_net==null) ? '-' : (r.main_net>=0?'+':'') + r.main_net.toFixed(2);
+      html += '<tr><td class="code">'+r.code+'</td><td>'+r.name+'</td>' +
+              '<td class="num">'+price+'</td>' +
+              '<td class="num '+pctCls+'">'+pct+'</td>' +
+              '<td class="num '+netCls+'">'+net+'</td></tr>';
     });
-    let html = '';
-    sorted.forEach(r=>{
-      const c5 = r.chg5==null ? '-' : (r.chg5>=0?'+':'') + r.chg5;
-      const c10 = r.chg10==null ? '-' : (r.chg10>=0?'+':'') + r.chg10;
-      const cls5 = r.chg5==null ? '' : (r.chg5>=0?'up':'down');
-      const cls10 = r.chg10==null ? '' : (r.chg10>=0?'up':'down');
-      html += '<tr><td>'+r.industry+'</td><td>'+r.n_stocks+'</td><td>'+r.pct5+'</td><td>'+r.pct10+
-              '</td><td class="'+cls5+'">'+c5+'</td><td class="'+cls10+'">'+c10+'</td></tr>';
-    });
-    tbody.innerHTML = html;
-    document.querySelectorAll('#indTable th.sortable').forEach(th=>{
-      const base = th.dataset.label || th.textContent.replace(/[ ▲▼]/g,'');
-      th.dataset.label = base;
-      th.textContent = base + (th.dataset.key===sortKey ? (sortDir<0?' ▼':' ▲') : '');
-    });
+    html += '</tbody></table>';
+    wrap.innerHTML = html;
   }
-  document.querySelectorAll('#indTable th.sortable').forEach(th=>{
-    th.addEventListener('click', ()=>{
-      const k = th.dataset.key;
-      if (sortKey === k) { sortDir = -sortDir; } else { sortKey = k; sortDir = -1; }
-      renderIndRows();
-    });
-  });
-  renderIndRows();
+  renderTable('etfInflowWrap', ef.inflow);
+  renderTable('etfOutflowWrap', ef.outflow);
 })();
 
 // ---- 4. 板块对比 (点击聚焦) ----
@@ -834,6 +786,13 @@ def run():
             data["margin"] = json.load(fp)
     else:
         data["margin"] = None
+
+    etf_path = os.path.join(DATA_DIR, "etf_flow.json")
+    if os.path.exists(etf_path):
+        with open(etf_path, "r", encoding="utf-8") as fp:
+            data["etf_flow"] = json.load(fp)
+    else:
+        data["etf_flow"] = None
 
     echarts_path = os.path.join(OUT_DIR, "echarts.min.js")
     with open(echarts_path, "r", encoding="utf-8") as fp:
