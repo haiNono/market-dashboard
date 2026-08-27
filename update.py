@@ -25,9 +25,12 @@ STEPS = [
 for name, script in STEPS:
     print(f"\n{'='*20} {name} {'='*20}", flush=True)
     r = subprocess.run([PY, "-u", script], cwd=BASE_DIR)
-    if r.returncode != 0:
-        # 偶发崩溃容错：fetch_stocks 曾出现 V8 初始化崩溃(退出码 2147483651/2)，自动重试一次
-        print(f"[重试] {name} 退出码 {r.returncode}，10 秒后自动重试一次", flush=True)
+    # 偶发崩溃容错：fetch_stocks 曾出现 py_mini_racer(V8) 初始化崩溃(退出码 2147483651/2)，
+    # 属进程级随机问题，重试=换进程重启，最多重试 3 次（2026-08-27 曾 2 连崩）
+    retries = 0
+    while r.returncode != 0 and retries < 3:
+        retries += 1
+        print(f"[重试{retries}/3] {name} 退出码 {r.returncode}，10 秒后重试", flush=True)
         time.sleep(10)
         r = subprocess.run([PY, "-u", script], cwd=BASE_DIR)
     if r.returncode != 0:
