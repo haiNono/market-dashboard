@@ -1,0 +1,211 @@
+
+==================== 增量拉取全A日线 ====================
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:00<00:03,  5.00it/s] 12%|█▏        | 2/17 [00:00<00:03,  4.10it/s] 18%|█▊        | 3/17 [00:00<00:03,  4.62it/s] 24%|██▎       | 4/17 [00:00<00:02,  4.81it/s] 29%|██▉       | 5/17 [00:01<00:02,  4.76it/s] 35%|███▌      | 6/17 [00:01<00:02,  4.47it/s] 41%|████      | 7/17 [00:01<00:03,  3.21it/s] 47%|████▋     | 8/17 [00:02<00:02,  3.56it/s] 53%|█████▎    | 9/17 [00:02<00:01,  4.02it/s] 59%|█████▉    | 10/17 [00:02<00:01,  4.43it/s] 65%|██████▍   | 11/17 [00:02<00:01,  4.73it/s] 71%|███████   | 12/17 [00:02<00:01,  4.94it/s] 76%|███████▋  | 13/17 [00:02<00:00,  5.14it/s] 82%|████████▏ | 14/17 [00:03<00:00,  5.21it/s] 88%|████████▊ | 15/17 [00:03<00:00,  4.62it/s] 94%|█████████▍| 16/17 [00:03<00:00,  4.87it/s]100%|██████████| 17/17 [00:03<00:00,  4.97it/s]                                               股票池: 5345 只 (剔除ST/退市/B股)
+[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
+[FATAL:partition_address_space.cc(243)] Check failed: !IsConfigurablePoolInitialized(). 
+#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
+#31 0x7ffe8085e8d7 (C:\Windows\System32\KERNEL32.DLL+0x2e8d7)
+#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
+#30 0x7ffe7f9937b0 (C:\Windows\System32\ucrtbase.dll+0x37b0)
+#16 0x7ffdde2de279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
+#17 0x7ffdde2ddc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
+#18 0x7ffdde360a11 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0a11)
+#19 0x7ffdde2fa2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
+#20 0x7ffdde3405f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
+#21 0x7ffdde360bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
+#22 0x7ffdde2de61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
+#23 0x7ffdde2ddc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
+#24 0x7ffdde362321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
+#16 0x7ffdde2de279 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e279)
+#25 0x7ffdde35e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
+#17 0x7ffdde2ddc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
+#26 0x7ffdde2fa9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
+#18 0x7ffdde360a11 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0a11)
+#27 0x7ffdde30f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
+#19 0x7ffdde2fa2a9 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a2a9)
+#28 0x7ffdde36c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
+#20 0x7ffdde3405f3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x905f3)
+#29 0x7ffdde36c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
+#21 0x7ffdde360bb3 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb0bb3)
+#22 0x7ffdde2de61e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2e61e)
+#23 0x7ffdde2ddc59 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x2dc59)
+#24 0x7ffdde362321 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xb2321)
+#25 0x7ffdde35e8e7 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xae8e7)
+#26 0x7ffdde2fa9d1 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x4a9d1)
+#27 0x7ffdde30f8ba (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0x5f8ba)
+#28 0x7ffdde36c564 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc564)
+#29 0x7ffdde36c3f2 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\python313.dll+0xbc3f2)
+#13 0x7ffe527c245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
+#14 0x7ffe527c2097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
+#15 0x7ffe527c1c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
+#13 0x7ffe527c245e (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x245e)
+#14 0x7ffe527c2097 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x2097)
+#15 0x7ffe527c1c87 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\_ctypes.pyd+0x1c87)
+#10 0x7ffe79d54791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
+#11 0x7ffe79d544a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
+#12 0x7ffe79d54352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
+#10 0x7ffe79d54791 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4791)
+#11 0x7ffe79d544a0 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x44a0)
+#12 0x7ffe79d54352 (C:\Users\hainu\.workbuddy\binaries\python\versions\3.13.12\DLLs\libffi-8.dll+0x4352)
+#0 0x7ffdc112ad32 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x158ad32)
+#1 0x7ffdc109e5a7 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x14fe5a7)
+#2 0x7ffdc0fe827d (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x144827d)
+#3 0x7ffdbfeee104 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34e104)
+#4 0x7ffdbfeec2b8 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x34c2b8)
+#5 0x7ffdbfbff113 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x5f113)
+#6 0x7ffdbfbae9b3 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xe9b3)
+#7 0x7ffdbfbaea8a (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xea8a)
+#8 0x7ffdbfba6785 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0x6785)
+#9 0x7ffdbfbacf23 (C:\Users\hainu\.workbuddy\binaries\python\envs\default\Lib\site-packages\py_mini_racer\mini_racer.dll+0xcf23)
+[重试] 增量拉取全A日线 退出码 2147483651，10 秒后自动重试一次
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:00<00:02,  5.49it/s] 12%|█▏        | 2/17 [00:00<00:02,  5.63it/s] 18%|█▊        | 3/17 [00:00<00:02,  5.70it/s] 24%|██▎       | 4/17 [00:00<00:02,  5.22it/s] 29%|██▉       | 5/17 [00:01<00:02,  4.39it/s] 35%|███▌      | 6/17 [00:01<00:02,  4.30it/s] 41%|████      | 7/17 [00:01<00:02,  4.22it/s] 47%|████▋     | 8/17 [00:01<00:02,  4.43it/s] 53%|█████▎    | 9/17 [00:01<00:01,  4.45it/s] 59%|█████▉    | 10/17 [00:02<00:01,  4.67it/s] 65%|██████▍   | 11/17 [00:02<00:01,  4.69it/s] 71%|███████   | 12/17 [00:02<00:01,  4.93it/s] 76%|███████▋  | 13/17 [00:02<00:00,  5.02it/s] 82%|████████▏ | 14/17 [00:03<00:00,  4.29it/s] 88%|████████▊ | 15/17 [00:03<00:00,  4.59it/s] 94%|█████████▍| 16/17 [00:03<00:00,  2.91it/s]100%|██████████| 17/17 [00:04<00:00,  3.40it/s]                                               股票池: 5345 只 (剔除ST/退市/B股)
+进度 200/5345  成功200 失败0  用时44s 预计剩余1143s
+进度 400/5345  成功400 失败0  用时85s 预计剩余1046s
+进度 600/5345  成功600 失败0  用时113s 预计剩余894s
+进度 800/5345  成功800 失败0  用时144s 预计剩余820s
+进度 1000/5345  成功1000 失败0  用时174s 预计剩余758s
+进度 1200/5345  成功1200 失败0  用时202s 预计剩余697s
+进度 1400/5345  成功1400 失败0  用时227s 预计剩余639s
+进度 1600/5345  成功1600 失败0  用时258s 预计剩余603s
+进度 1800/5345  成功1800 失败0  用时286s 预计剩余564s
+进度 2000/5345  成功2000 失败0  用时312s 预计剩余523s
+进度 2200/5345  成功2200 失败0  用时336s 预计剩余480s
+进度 2400/5345  成功2400 失败0  用时358s 预计剩余440s
+进度 2600/5345  成功2600 失败0  用时380s 预计剩余401s
+进度 2800/5345  成功2800 失败0  用时402s 预计剩余365s
+进度 3000/5345  成功3000 失败0  用时441s 预计剩余345s
+进度 3200/5345  成功3200 失败0  用时479s 预计剩余321s
+进度 3400/5345  成功3400 失败0  用时520s 预计剩余298s
+进度 3600/5345  成功3600 失败0  用时548s 预计剩余266s
+进度 3800/5345  成功3800 失败0  用时573s 预计剩余233s
+进度 4000/5345  成功4000 失败0  用时596s 预计剩余200s
+进度 4200/5345  成功4200 失败0  用时621s 预计剩余169s
+进度 4400/5345  成功4400 失败0  用时645s 预计剩余139s
+进度 4600/5345  成功4600 失败0  用时668s 预计剩余108s
+进度 4800/5345  成功4800 失败0  用时692s 预计剩余79s
+进度 5000/5345  成功5000 失败0  用时716s 预计剩余49s
+进度 5200/5345  成功5199 失败1  用时736s 预计剩余21s
+进度 5345/5345  成功5344 失败1  用时751s 预计剩余0s
+完成: 成功5344 失败1
+
+==================== 更新板块/PCR/申万成分 ====================
+=== 1. THS板块指数 ===
+  0%|          | 0/1 [00:00<?, ?it/s]                                     板块[半导体芯片 <- THS 半导体] OK 28行
+  0%|          | 0/39 [00:00<?, ?it/s]  5%|▌         | 2/39 [00:00<00:02, 12.37it/s] 10%|█         | 4/39 [00:00<00:02, 13.42it/s] 15%|█▌        | 6/39 [00:00<00:02, 12.38it/s] 21%|██        | 8/39 [00:00<00:03, 10.07it/s] 26%|██▌       | 10/39 [00:00<00:03,  9.22it/s] 28%|██▊       | 11/39 [00:01<00:03,  7.86it/s] 31%|███       | 12/39 [00:01<00:03,  7.91it/s] 36%|███▌      | 14/39 [00:01<00:02,  8.87it/s] 38%|███▊      | 15/39 [00:01<00:02,  8.56it/s] 44%|████▎     | 17/39 [00:01<00:02,  8.42it/s] 46%|████▌     | 18/39 [00:01<00:02,  8.24it/s] 49%|████▊     | 19/39 [00:02<00:02,  8.55it/s] 51%|█████▏    | 20/39 [00:02<00:02,  8.85it/s] 56%|█████▋    | 22/39 [00:02<00:01,  9.48it/s] 62%|██████▏   | 24/39 [00:02<00:01, 10.19it/s] 67%|██████▋   | 26/39 [00:02<00:01, 10.22it/s] 72%|███████▏  | 28/39 [00:02<00:01, 10.47it/s] 77%|███████▋  | 30/39 [00:03<00:00, 10.46it/s] 82%|████████▏ | 32/39 [00:03<00:00,  9.26it/s] 85%|████████▍ | 33/39 [00:03<00:00,  9.38it/s] 90%|████████▉ | 35/39 [00:03<00:00, 10.01it/s] 95%|█████████▍| 37/39 [00:03<00:00, 10.04it/s]100%|██████████| 39/39 [00:04<00:00, 10.11it/s]                                                 0%|          | 0/1 [00:00<?, ?it/s]                                     板块[算力租赁 <- THS 算力租赁] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.56it/s]                                             板块[云服务器 <- THS 云计算] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  6.54it/s]                                             板块[端侧 <- THS 消费电子] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  8.56it/s]                                             板块[电力 <- THS 电力] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]                                     板块[光通信 <- THS 共封装光学(CPO)] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.54it/s]                                             板块[券商 <- THS 证券] OK 28行
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  7.51it/s]                                             板块[传媒 <- THS 文化传媒] OK 28行
+=== 2. 申万三级成分(半导体材料/设备) ===
+申万三级[半导体材料 <- 850813] 成分26只
+申万三级[半导体设备 <- 850818] 成分26只
+=== 3. 申万二级全行业成分 ===
+申万二级成分进度 20/131
+申万二级成分进度 40/131
+申万二级成分进度 60/131
+申万二级成分进度 80/131
+申万二级成分进度 100/131
+申万二级成分进度 120/131
+申万二级成分总数 5207 条, 行业数 131
+=== 4. 期权PCR ===
+PCR交易日数: 642
+PCR进度 50/642
+PCR进度 100/642
+PCR进度 150/642
+PCR进度 200/642
+PCR进度 250/642
+PCR进度 300/642
+PCR进度 350/642
+PCR进度 400/642
+PCR进度 450/642
+PCR进度 500/642
+PCR进度 550/642
+PCR进度 600/642
+PCR[2026-08-26]失败 KeyError("None of [Index(['合约标的代码', '合约标的名称', '合约数量', '总成交额'
+PCR进度 642/642
+PCR记录 3205 条
+全部辅助数据完成
+
+==================== 更新两融余额数据 ====================
+[两融] 数据点 399（2025-01-02 ~ 2026-08-25）
+[两融] 最新: 合计 26476.6 亿元 | 两融/总市值 2.411%
+[两融] 上交所末日 13641.2 亿元 | 深交所末日 12835.4 亿元
+
+==================== 更新主题ETF资金流 ====================
+[ETF资金流] 分页拉取全量ETF(f62降序, push2delay)...
+[ETF资金流] 共拉到 1303 只 (失败页 0)
+[ETF资金流] 完成: 2026-08-26 流入10只 / 流出10只
+[ETF资金流] 流入榜首: 证券ETF国泰 +7.87亿
+[ETF资金流] 流出榜首: 有色金属ETF南方 -2.56亿
+
+==================== 指标计算 ====================
+kline文件 5345 个
+  加载 1000/5345
+  加载 2000/5345
+  加载 3000/5345
+  加载 4000/5345
+  加载 5000/5345
+透视收盘价矩阵...
+矩阵: 642 交易日 x 5345 股票
+  MA5 宽度完成
+  MA10 宽度完成
+  MA20 宽度完成
+  MA50 宽度完成
+  MA120 宽度完成
+行业宽度: 127个行业, 最新日2026-08-26 对比基准2026-08-19
+等权指数[半导体材料] 29日 成分26只
+等权指数[半导体设备] 29日 成分26只
+输出 e:\EProjects\workspace\market_dashboard\output\dashboard_data.json
+宽度区间: 2025-01-02 ~ 2026-08-26, 400交易日
+               b5    b10    b20    b50   b120  avg_price  stock_cnt
+date                                                               
+2026-08-24  24.86  21.20  41.75  40.84  17.08      28.46       5341
+2026-08-25  62.96  41.84  52.74  50.65  19.61      28.69       5341
+2026-08-26  61.57  47.46  53.02  53.01  19.94      28.72       5342
+
+==================== 生成Dashboard ====================
+[事件过滤] 移除已发生事件 3 条（共 52 -> 49）
+生成 e:\EProjects\workspace\market_dashboard\output\dashboard.html  大小 1160KB
+生成 e:\EProjects\workspace\market_dashboard\docs\index.html  大小 1160KB
+JS自检文件 e:\EProjects\workspace\market_dashboard\output\_check.js
+
+==================== 同步资料库事件文档 ====================
+CLIENT_MODE_NO_TOKEN: agent 环境需设置 EVENT_TOKEN 环境变量
+[警告] 事件文档同步失败(退出码 2)，沿用上次事件数据
+
+==================== 跳过AI监控刷新(仅周五执行) ====================
+
+==================== 重新生成Dashboard(含事件页) ====================
+[事件过滤] 移除已发生事件 3 条（共 52 -> 49）
+生成 e:\EProjects\workspace\market_dashboard\output\dashboard.html  大小 1160KB
+生成 e:\EProjects\workspace\market_dashboard\docs\index.html  大小 1160KB
+JS自检文件 e:\EProjects\workspace\market_dashboard\output\_check.js
+
+全部完成 -> output/dashboard.html
+
+==================== 推送GitHub Pages(可选) ====================
+warning: in the working copy of 'data/etf_flow.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/margin.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/option_pcr.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_云服务器.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_传媒.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_光通信.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_券商.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_半导体芯片.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_电力.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_端侧.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sector_算力租赁.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sw2_components.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sw3_半导体材料.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/sw3_半导体设备.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/universe.csv', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/index.html', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'output/dashboard.html', CRLF will be replaced by LF the next time Git touches it
+[main f0425bd] auto: 每日数据更新
+ 17 files changed, 363 insertions(+), 130 deletions(-)
+ create mode 100644 update_run_2026-08-26.log
+To github.com:haiNono/market-dashboard.git
+   1d5b606..f0425bd  main -> main
+[GitHub] 已推送，线上 Pages 将自动更新
