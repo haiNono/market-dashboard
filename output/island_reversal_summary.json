@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "strategy_name": "孤岛反转事件研究",
+    "market": "china_a",
+    "start": "2026-04-21",
+    "end": "2026-08-28"
+  },
+  "summary": {
+    "total_events": 240,
+    "cumulative_return_pct": -185.76,
+    "avg_return_pct": -0.77,
+    "median_return_pct": -2.52,
+    "win_rate_pct": 42.9,
+    "best_trade_pct": 48.22,
+    "worst_trade_pct": -31.4
+  },
+  "by_holding_period": {
+    "5": {
+      "total_events": 250,
+      "cumulative_return_pct": 5.3,
+      "avg_return_pct": 0.02,
+      "median_return_pct": 0.0,
+      "win_rate_pct": 49.6,
+      "best_trade_pct": 35.76,
+      "worst_trade_pct": -33.39
+    },
+    "10": {
+      "total_events": 240,
+      "cumulative_return_pct": -185.76,
+      "avg_return_pct": -0.77,
+      "median_return_pct": -2.52,
+      "win_rate_pct": 42.9,
+      "best_trade_pct": 48.22,
+      "worst_trade_pct": -31.4
+    },
+    "20": {
+      "total_events": 202,
+      "cumulative_return_pct": -1220.65,
+      "avg_return_pct": -6.04,
+      "median_return_pct": -7.12,
+      "win_rate_pct": 31.7,
+      "best_trade_pct": 52.61,
+      "worst_trade_pct": -46.17
+    }
+  }
+}
