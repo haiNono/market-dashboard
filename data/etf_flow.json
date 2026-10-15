@@ -1,82 +1,82 @@
 {
- "date": "2026-10-05",
+ "date": "2026-10-15",
  "inflow": [
   {
-   "code": "159992",
-   "name": "创新药ETF银华",
-   "price": 0.872,
-   "pct": 3.32,
-   "main_net": 2.39
+   "code": "515700",
+   "name": "新能源车ETF平安",
+   "price": 1.804,
+   "pct": -1.53,
+   "main_net": 0.01
   },
   {
-   "code": "515120",
-   "name": "创新药ETF广发",
-   "price": 0.654,
-   "pct": 3.48,
-   "main_net": 1.73
+   "code": "516920",
+   "name": "芯片ETF汇添富",
+   "price": 1.138,
+   "pct": -1.73,
+   "main_net": 0.01
   },
   {
-   "code": "589720",
-   "name": "科创创新药ETF国泰",
+   "code": "560910",
+   "name": "电池ETF华泰柏瑞",
+   "price": 0.626,
+   "pct": -2.03,
+   "main_net": 0.01
+  },
+  {
+   "code": "515950",
+   "name": "医药50ETF富国",
    "price": 0.921,
-   "pct": 3.48,
-   "main_net": 1.33
+   "pct": 0.22,
+   "main_net": 0.01
   },
   {
-   "code": "512010",
-   "name": "医药ETF易方达",
-   "price": 0.388,
-   "pct": 2.92,
-   "main_net": 0.83
+   "code": "159864",
+   "name": "光伏ETF国泰",
+   "price": 0.469,
+   "pct": -3.3,
+   "main_net": 0.01
   },
   {
-   "code": "512690",
-   "name": "酒ETF鹏华",
-   "price": 0.417,
-   "pct": 2.96,
-   "main_net": 0.82
+   "code": "589180",
+   "name": "科创新材料ETF汇添富",
+   "price": 1.387,
+   "pct": -3.55,
+   "main_net": 0.01
   },
   {
-   "code": "510880",
-   "name": "红利ETF华泰柏瑞",
-   "price": 3.368,
-   "pct": 1.29,
-   "main_net": 0.67
+   "code": "560580",
+   "name": "电力ETF南方",
+   "price": 1.1,
+   "pct": -1.61,
+   "main_net": 0.01
   },
   {
-   "code": "512170",
-   "name": "医疗ETF华宝",
-   "price": 0.349,
-   "pct": 2.95,
-   "main_net": 0.64
+   "code": "515210",
+   "name": "钢铁ETF国泰",
+   "price": 1.095,
+   "pct": -2.49,
+   "main_net": 0.01
   },
   {
-   "code": "516080",
-   "name": "创新药ETF易方达",
-   "price": 0.698,
-   "pct": 3.41,
-   "main_net": 0.51
+   "code": "517900",
+   "name": "银行AH优选ETF招商",
+   "price": 1.609,
+   "pct": -0.37,
+   "main_net": 0.01
   },
   {
-   "code": "561100",
-   "name": "消费电子ETF富国",
-   "price": 1.516,
-   "pct": -2.07,
-   "main_net": 0.46
-  },
-  {
-   "code": "159859",
-   "name": "生物医药ETF天弘",
-   "price": 0.41,
-   "pct": 3.8,
-   "main_net": 0.41
+   "code": "516520",
+   "name": "智能驾驶ETF华泰柏瑞",
+   "price": 0.915,
+   "pct": -2.76,
+   "main_net": 0.01
   }
  ],
  "outflow": [],
  "meta": {
-  "updated_at": "2026-10-05 18:18",
-  "total_etf": 700,
-  "filtered": "主题ETF判定=全部ETF剔除宽基/固收/跨境/商品，保留512只",
+  "updated_at": "2026-10-15 18:24",
+  "total_etf": 300,
+  "filtered": "主题ETF判定=全部ETF剔除宽基/固收/跨境/商品，保留240只",
   "source": "东财行情中心 主力净流入(f62)，当日快照"
  }
 }
