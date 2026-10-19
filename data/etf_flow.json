@@ -1,82 +1,82 @@
 {
- "date": "2026-10-16",
+ "date": "2026-10-19",
  "inflow": [
   {
-   "code": "159206",
-   "name": "卫星ETF永赢",
-   "price": 1.182,
-   "pct": 2.78,
-   "main_net": 0.53
+   "code": "515880",
+   "name": "通信ETF国泰",
+   "price": 0.523,
+   "pct": 0.19,
+   "main_net": 1.51
   },
   {
-   "code": "515220",
-   "name": "煤炭ETF国泰",
-   "price": 1.265,
-   "pct": 1.2,
-   "main_net": 0.46
+   "code": "512880",
+   "name": "证券ETF国泰",
+   "price": 1.033,
+   "pct": 0.29,
+   "main_net": 0.73
   },
   {
-   "code": "512660",
-   "name": "军工ETF国泰",
-   "price": 1.059,
-   "pct": 2.72,
-   "main_net": 0.46
+   "code": "515080",
+   "name": "中证红利ETF招商",
+   "price": 1.586,
+   "pct": 0.83,
+   "main_net": 0.63
   },
   {
-   "code": "512040",
-   "name": "价值ETF富国",
-   "price": 1.18,
-   "pct": 0.25,
+   "code": "512820",
+   "name": "银行ETF汇添富",
+   "price": 1.536,
+   "pct": 1.39,
+   "main_net": 0.58
+  },
+  {
+   "code": "512800",
+   "name": "银行ETF华宝",
+   "price": 0.877,
+   "pct": 1.5,
+   "main_net": 0.44
+  },
+  {
+   "code": "516150",
+   "name": "稀土ETF嘉实",
+   "price": 1.453,
+   "pct": 0.55,
+   "main_net": 0.43
+  },
+  {
+   "code": "159326",
+   "name": "电网设备ETF华夏",
+   "price": 1.484,
+   "pct": 2.42,
    "main_net": 0.42
   },
   {
-   "code": "510880",
-   "name": "红利ETF华泰柏瑞",
-   "price": 3.43,
-   "pct": 0.7,
-   "main_net": 0.4
+   "code": "512690",
+   "name": "酒ETF鹏华",
+   "price": 0.423,
+   "pct": 0.48,
+   "main_net": 0.38
+  },
+  {
+   "code": "159992",
+   "name": "创新药ETF银华",
+   "price": 0.804,
+   "pct": 1.01,
+   "main_net": 0.35
   },
   {
    "code": "512890",
    "name": "红利低波ETF华泰柏瑞",
-   "price": 1.219,
-   "pct": 0.58,
-   "main_net": 0.32
-  },
-  {
-   "code": "588830",
-   "name": "科创新能源ETF鹏华",
-   "price": 1.005,
-   "pct": -0.4,
-   "main_net": 0.32
-  },
-  {
-   "code": "512710",
-   "name": "军工龙头ETF富国",
-   "price": 0.618,
-   "pct": 3.34,
-   "main_net": 0.3
-  },
-  {
-   "code": "563230",
-   "name": "卫星ETF富国",
-   "price": 0.953,
-   "pct": 2.92,
-   "main_net": 0.29
-  },
-  {
-   "code": "159732",
-   "name": "消费电子ETF华夏",
-   "price": 1.073,
-   "pct": -0.09,
-   "main_net": 0.27
+   "price": 1.236,
+   "pct": 1.39,
+   "main_net": 0.33
   }
  ],
  "outflow": [],
  "meta": {
-  "updated_at": "2026-10-16 18:22",
-  "total_etf": 700,
-  "filtered": "主题ETF判定=全部ETF剔除宽基/固收/跨境/商品，保留531只",
+  "updated_at": "2026-10-19 18:51",
+  "total_etf": 600,
+  "filtered": "主题ETF判定=全部ETF剔除宽基/固收/跨境/商品，保留444只",
   "source": "东财行情中心 主力净流入(f62)，当日快照"
  }
 }
