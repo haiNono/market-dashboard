@@ -1,82 +1,153 @@
 {
- "date": "2026-11-12",
+ "date": "2026-11-17",
  "inflow": [
   {
-   "code": "512480",
-   "name": "半导体ETF国联安",
-   "price": 0.813,
-   "pct": 0.49,
-   "main_net": 0.8
+   "code": "588170",
+   "name": "科创半导体ETF华夏",
+   "price": 0.686,
+   "pct": 3.63,
+   "main_net": 2.81
   },
   {
-   "code": "159995",
-   "name": "芯片ETF华夏",
-   "price": 0.881,
-   "pct": 1.15,
-   "main_net": 0.69
+   "code": "159530",
+   "name": "机器人ETF易方达",
+   "price": 1.212,
+   "pct": -3.96,
+   "main_net": 1.46
   },
   {
-   "code": "159781",
-   "name": "科创创业ETF易方达",
-   "price": 0.768,
-   "pct": -0.9,
+   "code": "159516",
+   "name": "半导体设备ETF国泰",
+   "price": 0.515,
+   "pct": 4.46,
+   "main_net": 1.08
+  },
+  {
+   "code": "159558",
+   "name": "半导体设备ETF易方达",
+   "price": 0.809,
+   "pct": 4.66,
+   "main_net": 1.01
+  },
+  {
+   "code": "512660",
+   "name": "军工ETF国泰",
+   "price": 0.958,
+   "pct": -0.73,
    "main_net": 0.56
   },
   {
-   "code": "516650",
-   "name": "有色金属ETF华夏",
-   "price": 1.45,
-   "pct": -3.01,
-   "main_net": 0.46
+   "code": "560780",
+   "name": "半导体设备ETF广发",
+   "price": 0.758,
+   "pct": 4.26,
+   "main_net": 0.5
   },
   {
-   "code": "588200",
-   "name": "科创芯片ETF嘉实",
-   "price": 0.894,
-   "pct": 0.68,
-   "main_net": 0.42
+   "code": "159928",
+   "name": "消费ETF汇添富",
+   "price": 0.71,
+   "pct": 0.0,
+   "main_net": 0.45
   },
   {
-   "code": "512760",
-   "name": "芯片ETF国泰",
-   "price": 0.87,
-   "pct": 0.58,
-   "main_net": 0.41
+   "code": "589020",
+   "name": "科创半导体设备ETF鹏华",
+   "price": 0.84,
+   "pct": 4.35,
+   "main_net": 0.39
   },
   {
-   "code": "588230",
-   "name": "科创200ETF华泰柏瑞",
-   "price": 1.51,
-   "pct": -2.14,
+   "code": "512400",
+   "name": "有色金属ETF南方",
+   "price": 1.33,
+   "pct": -0.15,
    "main_net": 0.37
   },
   {
-   "code": "512980",
-   "name": "传媒ETF广发",
-   "price": 0.826,
-   "pct": -3.39,
-   "main_net": 0.35
-  },
-  {
-   "code": "159813",
-   "name": "半导体ETF鹏华",
-   "price": 0.567,
-   "pct": 1.43,
-   "main_net": 0.32
-  },
-  {
-   "code": "512040",
-   "name": "价值ETF富国",
-   "price": 1.187,
+   "code": "512200",
+   "name": "房地产ETF南方",
+   "price": 1.082,
    "pct": -0.92,
-   "main_net": 0.31
+   "main_net": 0.3
   }
  ],
- "outflow": [],
+ "outflow": [
+  {
+   "code": "515880",
+   "name": "通信ETF国泰",
+   "price": 0.377,
+   "pct": -2.08,
+   "main_net": -1.69
+  },
+  {
+   "code": "588710",
+   "name": "科创半导体设备ETF华泰柏瑞",
+   "price": 0.711,
+   "pct": 4.1,
+   "main_net": -0.73
+  },
+  {
+   "code": "510880",
+   "name": "红利ETF华泰柏瑞",
+   "price": 3.416,
+   "pct": -0.35,
+   "main_net": -0.56
+  },
+  {
+   "code": "159869",
+   "name": "游戏ETF华夏",
+   "price": 0.964,
+   "pct": -3.02,
+   "main_net": -0.54
+  },
+  {
+   "code": "515050",
+   "name": "通信ETF华夏",
+   "price": 0.594,
+   "pct": -2.14,
+   "main_net": -0.5
+  },
+  {
+   "code": "562500",
+   "name": "机器人ETF华夏",
+   "price": 0.81,
+   "pct": -2.29,
+   "main_net": -0.46
+  },
+  {
+   "code": "159992",
+   "name": "创新药ETF银华",
+   "price": 0.786,
+   "pct": -1.01,
+   "main_net": -0.44
+  },
+  {
+   "code": "159259",
+   "name": "成长ETF易方达",
+   "price": 0.796,
+   "pct": -2.33,
+   "main_net": -0.43
+  },
+  {
+   "code": "513630",
+   "name": "港股低波红利ETF摩根",
+   "price": 1.617,
+   "pct": 0.81,
+   "main_net": -0.37
+  },
+  {
+   "code": "512800",
+   "name": "银行ETF华宝",
+   "price": 0.916,
+   "pct": -0.11,
+   "main_net": -0.35
+  }
+ ],
  "meta": {
-  "updated_at": "2026-11-12 18:21",
-  "total_etf": 900,
-  "filtered": "主题ETF判定=全部ETF剔除宽基/固收/跨境/商品，保留632只",
+  "updated_at": "2026-11-17 18:20",
+  "total_etf": 1379,
+  "filtered": "主题ETF判定=全部ETF剔除宽基/固收/跨境/商品，保留967只",
   "source": "东财行情中心 主力净流入(f62)，当日快照"
  }
 }
