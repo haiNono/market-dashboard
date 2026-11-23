@@ -5,27 +5,43 @@ import json
 import base64
 import calendar
 import re
-from datetime import date
+from datetime import date, datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 OUT_DIR = os.path.join(BASE_DIR, "output")
 
 
-def parse_event_date(s):
-    """解析事件日期字符串 -> date(2026, m, d)，返回代表事件窗口结束的日期。
-    例: 8/19 -> 8-19 | 9/9–10 -> 9-10 | 10月（全月）-> 10-31 | 9月底 -> 9-30 | 10月中旬 -> 10-15
-    无法解析返回 None（调用方保留该事件）。"""
+def parse_event_date(s, iso=None):
+    """解析事件日期 -> date，返回代表事件窗口结束的日期（用于剔除已发生事件）。
+
+    优先使用事件自带 iso（带年份，由 fetch_events.py 依据文档整理日期推算）；
+    回退到旧的无年份字符串解析（以今天所在年份为基准）：
+      例: 8/19 -> 8-19 | 9/9–10 -> 9-10 | 10月（全月）-> 月末 | 10月中旬 -> 10-15
+    无法解析返回 None（调用方保留该事件）。
+    """
+    if iso:
+        try:
+            return date.fromisoformat(iso[:10])
+        except ValueError:
+            pass
+    base_year = date.today().year
+    s = s or ""
     m = re.match(r'(\d{1,2})/(\d{1,2})', s)
     if m:
         month, day = int(m.group(1)), int(m.group(2))
-        mr = re.search(r'[–-](\d{1,2})', s)  # 区间结束日，如 9/9–10
+        mr = re.search(r'[–-](\d{1,2})(?!\d*/)', s)  # 区间结束日，如 9/9–10
         if mr:
             day = max(day, int(mr.group(1)))
-        return date(2026, month, day)
+        try:
+            return date(base_year, month, day)
+        except ValueError:
+            return None
     mm = re.search(r'(\d{1,2})月', s)
     if mm:
         month = int(mm.group(1))
+        if month < 1 or month > 12:
+            return None
         if '月底' in s:
             day = 30
         elif '下旬' in s:
@@ -35,8 +51,11 @@ def parse_event_date(s):
         elif '上旬' in s:
             day = 5
         else:  # 全月/待定 → 月末
-            day = calendar.monthrange(2026, month)[1]
-        return date(2026, month, day)
+            day = calendar.monthrange(base_year, month)[1]
+        try:
+            return date(base_year, month, day)
+        except ValueError:
+            return None
     return None
 
 HTML_TEMPLATE = r"""<!DOCTYPE html>
@@ -297,8 +316,8 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 
   <div id="pageEvents" class="page" style="display:none">
     <div class="card" id="ev0">
-      <h2>未来2月重大事件时间线（2026-08-16 ~ 10-16）<span class="qmark">?<span class="qtip">按时间顺序排列影响股市的 52 个事件。左侧数字徽章=重要性等级(1-10，越大越重要)，颜色分级：深红=10、红=9、橙红=8、橙=7、金黄=6、青蓝=5、灰=4。可按"全部 / ≥7重要 / ≥9核心"过滤。确定性：✅已确认 🔶预计 🔁派生。</span></span></h2>
-      <div class="desc">重要性颜色：<span class="lg lg10">10</span><span class="lg lg9">9</span><span class="lg lg8">8</span><span class="lg lg7">7</span><span class="lg lg6">6</span><span class="lg lg5">5</span><span class="lg lg4">4</span> ｜ 确定性：✅已确认　🔶预计　🔁派生</div>
+      <h2>重大事件时间线<span class="tag" id="evTag"></span><span class="qmark">?<span class="qtip" id="evTip">按时间顺序排列影响股市的重大事件，自动同步自资料库《未来2月影响股市的重大事件时间表（含重要性等级）》。左侧数字徽章=重要性等级(1-10，越大越重要)，颜色分级：深红=10、红=9、橙红=8、橙=7、金黄=6、青蓝=5、灰=4。可按"全部 / ≥7重要 / ≥9核心"过滤；已过去的事件在构建时自动移除。确定性：✅已确认 🔶预计 🔁派生。</span></span></h2>
+      <div class="desc" id="evPeriodDesc"></div>
       <div class="filter-bar">
         <button class="fbtn active" data-min="0">全部事件</button>
         <button class="fbtn" data-min="7">≥7 重要</button>
@@ -307,18 +326,18 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
       <div class="ev-timeline" id="evTimeline"></div>
     </div>
     <div class="card" id="ev1">
-      <h2>重点事件解读<span class="qmark">?<span class="qtip">10 个重点事件的详细解读：每条含催化逻辑、影响路径与跟踪要点，重要性标注在标题前。用于理解事件"为什么重要"及事件落地前后的板块交易逻辑（防"买预期卖事实"）。</span></span></h2>
-      <div class="desc">来自文档"重点事件详解"：催化逻辑 · 影响路径 · 跟踪要点</div>
+      <h2>重点事件解读与月末新增变化<span class="qmark">?<span class="qtip">取文档"三、结构观察"章节：逐条给出事件的催化逻辑、影响路径与跟踪要点，并标注重要性。用于理解事件"为什么重要"及事件落地前后的板块交易逻辑（防"买预期卖事实"）。</span></span></h2>
+      <div class="desc">来自文档「三、结构观察」：催化逻辑 · 影响路径 · 跟踪要点（徽章=该条的重要性等级或日期）</div>
       <div id="evDeep"></div>
     </div>
     <div class="card" id="ev2">
-      <h2>事件 → 板块映射与核心个股<span class="qmark">?<span class="qtip">把时间线事件映射到 7 条投资主线：每条含催化事件、受益板块与代表性核心个股。核心个股仅为板块代表性标的、非推荐买入，用于定位行情发起点与跟踪对象。</span></span></h2>
+      <h2>事件 → 板块映射与核心个股<span class="qmark">?<span class="qtip">把时间线事件映射到当前几条主要投资主线：每条含催化事件、受益板块与代表性核心个股。核心个股仅为板块代表性标的、非推荐买入，用于定位行情发起点与跟踪对象。</span></span></h2>
       <div class="desc">主线 → 催化事件 → 受益板块 → 核心个股（代表性标的，仅供研究参考）</div>
       <div id="evSectors"></div>
     </div>
     <div class="card" id="ev3">
-      <h2>风险提示与用法建议<span class="qmark">?<span class="qtip">使用事件日历的 7 条风控要点：确定性分级、"买预期卖事实"、数据驱动锚点、解禁≠减持、三季报+解禁叠加、长假效应等。交易决策前先过一遍本条。</span></span></h2>
-      <div class="desc">事件日历的使用边界与风控要点（非投资建议）</div>
+      <h2>风险提示与用法建议<span class="qmark">?<span class="qtip">上半部分为文档"关键风险清单"（机构共识 + 本轮新增），下半部分为使用事件日历的固定风控要点：确定性分级、"买预期卖事实"、数据驱动锚点、解禁≠减持、长假效应等。交易决策前先过一遍。</span></span></h2>
+      <div class="desc">文档关键风险清单 + 事件日历的使用边界（非投资建议）</div>
       <div id="evRisks"></div>
     </div>
   </div>
@@ -636,8 +655,39 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
     return '#7a8599';
   }
   const cert = ev.certainty_map;
+  const meta = ev.meta || {};
+  const tl = ev.timeline || [];
+  // 顶部信息：文档整理日期 / 看板同步时间 / 梳理区间 / 条数
+  (function fillHead(){
+    const tagEl = document.getElementById('evTag');
+    if (tagEl) tagEl.textContent = '文档更新 ' + (meta.doc_updated || '—') + '｜同步 ' + (meta.synced_at || '—');
+    const dEl = document.getElementById('evPeriodDesc');
+    if (dEl) {
+      const period = (meta.period || '').split('（')[0].trim();
+      const gone = meta.removed || 0;
+      const isos = tl.map(e=>e.iso).filter(Boolean).sort();
+      const span = isos.length ? (isos[0] + ' ~ ' + isos[isos.length-1]) : '—';
+      const stale = meta.stale_days;
+      const warn = (stale !== null && stale !== undefined && stale >= 7)
+        ? '<span style="color:#c62828;font-weight:700">⚠ 事件数据已 ' + stale + ' 天未成功同步（沿用旧文档内容），请检查资料库文档或同步脚本</span>　'
+        : '';
+      dEl.innerHTML = warn + '文档梳理区间：' + (period || '—') +
+        ' ｜ 事件覆盖：' + span +
+        ' ｜ 共 <b>' + tl.length + '</b> 条未来事件' +
+        (gone ? '（已自动隐藏 ' + gone + ' 条已过去事件）' : '') +
+        '<br>重要性颜色：<span class="lg lg10">10</span><span class="lg lg9">9</span><span class="lg lg8">8</span>' +
+        '<span class="lg lg7">7</span><span class="lg lg6">6</span><span class="lg lg5">5</span> ｜ ✅已确认　🔶预计　🔁派生';
+    }
+  })();
   function renderTimeline(minImp){
-    const items = ev.timeline.filter(e=>e.imp>=minImp);
+    const items = tl.filter(e=>e.imp>=minImp);
+    if (!items.length){
+      document.getElementById('evTimeline').innerHTML =
+        '<div class="empty">当前区间内没有符合条件的事件' +
+        (tl.length ? '' : '：事件文档可能未更新，请检查资料库《未来2月影响股市的重大事件时间表》是否为最新版本') +
+        '</div>';
+      return;
+    }
     document.getElementById('evTimeline').innerHTML = items.map(e=>
       '<div class="ev-item' + (e.imp>=9?' top':'') + '">' +
         '<div class="ev-date">' + e.date + '</div>' +
@@ -648,7 +698,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
             '<span class="ev-cat">' + e.cat + '</span>' +
             '<span class="ev-cert" title="' + (cert[e.certainty]||'') + '">' + e.certainty + '</span>' +
           '</div>' +
-          '<div class="ev-impact">影响：' + e.impact + '</div>' +
+          '<div class="ev-impact">影响：' + (e.impact || '全市场') + '</div>' +
         '</div>' +
       '</div>').join('');
   }
@@ -769,9 +819,19 @@ def run():
     before = len(events.get("timeline", []))
     events["timeline"] = [
         e for e in events.get("timeline", [])
-        if (d := parse_event_date(e.get("date", ""))) is None or d >= today
+        if (d := parse_event_date(e.get("date", ""), e.get("iso"))) is None or d >= today
     ]
     removed = before - len(events["timeline"])
+    events.setdefault("meta", {})["removed"] = removed
+    # 同步时效：>7 天未成功同步则在页面顶部红字警示（避免再次静默失效）
+    sync_at = events["meta"].get("synced_at")
+    if sync_at:
+        try:
+            events["meta"]["stale_days"] = (today - datetime.strptime(sync_at, "%Y-%m-%d %H:%M").date()).days
+        except ValueError:
+            events["meta"]["stale_days"] = None
+    else:
+        events["meta"]["stale_days"] = None
     if removed:
         print(f"[事件过滤] 移除已发生事件 {removed} 条（共 {before} -> {len(events['timeline'])}）")
     data["events_page"] = events

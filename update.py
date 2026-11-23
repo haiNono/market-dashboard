@@ -38,10 +38,19 @@ for name, script in STEPS:
         sys.exit(1)
 
 # 事件时间表：从资料库文档同步（可选步骤，失败不阻断，沿用上次 events.json）
+# 注意：该步骤曾因 skill-library 版本目录硬编码失效而静默失败 3 个月，故这里重试 2 次并把失败原因打全，
+# 同时 build_dashboard 会在事件页顶部显示"同步已过期 X 天"的红字警示。
 print(f"\n{'='*20} 同步资料库事件文档 {'='*20}", flush=True)
 r = subprocess.run([PY, "-u", os.path.join(SCRIPTS, "fetch_events.py")], cwd=BASE_DIR)
+retries = 0
+while r.returncode != 0 and retries < 2:
+    retries += 1
+    print(f"[重试{retries}/2] 事件文档同步退出码 {r.returncode}，15 秒后重试", flush=True)
+    time.sleep(15)
+    r = subprocess.run([PY, "-u", os.path.join(SCRIPTS, "fetch_events.py")], cwd=BASE_DIR)
 if r.returncode != 0:
-    print(f"[警告] 事件文档同步失败(退出码 {r.returncode})，沿用上次事件数据", flush=True)
+    print(f"[警告] 事件文档同步失败(退出码 {r.returncode})，沿用上次事件数据"
+          f"；若连续多日失败请检查 fetch_events.py 的 DOC_NODE_ID 与 skill-library 路径", flush=True)
 
 # AI 监控数据：仅周五刷新（GPU 租赁价格周度抓取；失败不阻断，保留上次数据）
 if datetime.date.today().weekday() == 4:  # 4 = Friday
