@@ -168,6 +168,10 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
             border-radius:10px; display:inline-flex; align-items:center; justify-content:center; }
   .ev-name { font-size:13.5px; font-weight:600; color:#2b3245; }
   .ev-cat { font-size:11px; color:#6b7689; background:#f0f3f8; padding:1px 7px; border-radius:9px; }
+  .ev-happened { font-size:11px; font-weight:700; color:#fff; background:#8d99ae; padding:1px 7px; border-radius:9px; }
+  .ev-extra { font-size:11px; font-weight:700; color:#7a4b00; background:#ffe9b8; border:1px solid #f0c96a; padding:1px 7px; border-radius:9px; }
+  .ev-item.happened .ev-name { color:#5d6b82; }
+  .ev-item.happened { opacity:.88; }
   .ev-cert { font-size:12px; }
   .ev-impact { font-size:12px; color:#8a94a6; margin-top:4px; }
   /* 重点事件解读 */
@@ -665,6 +669,8 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
     if (dEl) {
       const period = (meta.period || '').split('（')[0].trim();
       const gone = meta.removed || 0;
+      const hp = meta.happened_shown || 0;
+      const ex = meta.extra_count || 0;
       const isos = tl.map(e=>e.iso).filter(Boolean).sort();
       const span = isos.length ? (isos[0] + ' ~ ' + isos[isos.length-1]) : '—';
       const stale = meta.stale_days;
@@ -673,10 +679,13 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
         : '';
       dEl.innerHTML = warn + '文档梳理区间：' + (period || '—') +
         ' ｜ 事件覆盖：' + span +
-        ' ｜ 共 <b>' + tl.length + '</b> 条未来事件' +
-        (gone ? '（已自动隐藏 ' + gone + ' 条已过去事件）' : '') +
+        ' ｜ 共 <b>' + tl.length + '</b> 条事件' +
+        (ex ? '（含 <b>' + ex + '</b> 条人工核实补充：文档按月更新无法覆盖月中突发治理/监管级事件）' : '') +
+        (hp ? '，其中 <b>' + hp + '</b> 条已发生仍在观察窗口（标「已发生」）' : '') +
+        (gone ? '，已隐藏 ' + gone + ' 条过期事件' : '') +
         '<br>重要性颜色：<span class="lg lg10">10</span><span class="lg lg9">9</span><span class="lg lg8">8</span>' +
-        '<span class="lg lg7">7</span><span class="lg lg6">6</span><span class="lg lg5">5</span> ｜ ✅已确认　🔶预计　🔁派生';
+        '<span class="lg lg7">7</span><span class="lg lg6">6</span><span class="lg lg5">5</span> ｜ ✅已确认　🔶预计　🔁派生' +
+        (ex ? ' ｜ <span class="ev-extra">核实补充</span>=人工核实录入的超重大事件' : '');
     }
   })();
   function renderTimeline(minImp){
@@ -689,12 +698,14 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click', ()=>swi
       return;
     }
     document.getElementById('evTimeline').innerHTML = items.map(e=>
-      '<div class="ev-item' + (e.imp>=9?' top':'') + '">' +
+      '<div class="ev-item' + (e.imp>=9?' top':'') + (e.happened?' happened':'') + '">' +
         '<div class="ev-date">' + e.date + '</div>' +
         '<div class="ev-body">' +
           '<div class="ev-top">' +
             '<span class="ev-imp" style="background:' + impColor(e.imp) + '" title="重要性 ' + e.imp + '/10">' + e.imp + '</span>' +
             '<span class="ev-name">' + e.event + '</span>' +
+            (e.happened ? '<span class="ev-happened" title="该事件已发生 ' + (e.days_ago||0) + ' 天，仍在观察窗口内保留（重要事件影响持续发酵）">已发生' + (e.days_ago ? ' ' + e.days_ago + '天前' : '') + '</span>' : '') +
+            (e.src==='extra' ? '<span class="ev-extra" title="人工核实补充事件：资料库事件文档按月更新，无法覆盖月中突发重大事件（治理/监管级），此条目由本地补充池 events_extra.json 录入并已核实来源">核实补充</span>' : '') +
             '<span class="ev-cat">' + e.cat + '</span>' +
             '<span class="ev-cert" title="' + (cert[e.certainty]||'') + '">' + e.certainty + '</span>' +
           '</div>' +
@@ -815,14 +826,26 @@ def run():
         events = json.load(fp)
 
     # 过滤已发生事件：事件窗口结束日 < 今天 的从时间线移除（events.json 保留完整快照）
+    # 例外：人工核实的补充事件(extra)已发生后仍在 keep_days 天内保留，并标注"已发生"——
+    # 这类事件（如英伟达 CEO 变动）是当周最大定价变量，刚录入就消失等于失效。
     today = date.today()
+    keep_days = int(events.get("meta", {}).get("extra_keep_days") or 14)
     before = len(events.get("timeline", []))
-    events["timeline"] = [
-        e for e in events.get("timeline", [])
-        if (d := parse_event_date(e.get("date", ""), e.get("iso"))) is None or d >= today
-    ]
-    removed = before - len(events["timeline"])
-    events.setdefault("meta", {})["removed"] = removed
+    kept, happened = [], 0
+    for e in events.get("timeline", []):
+        d = parse_event_date(e.get("date", ""), e.get("iso"))
+        if d is None or d >= today:
+            kept.append(e)
+            continue
+        if e.get("src") == "extra" and (today - d).days <= keep_days:
+            e["happened"] = True
+            e["days_ago"] = (today - d).days
+            kept.append(e)
+            happened += 1
+    events["timeline"] = kept
+    removed = before - len(kept)
+    events.setdefault("meta", {})["happened_shown"] = happened
+    events["meta"]["removed"] = removed
     # 同步时效：>7 天未成功同步则在页面顶部红字警示（避免再次静默失效）
     sync_at = events["meta"].get("synced_at")
     if sync_at:

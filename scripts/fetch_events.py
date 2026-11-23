@@ -538,6 +538,49 @@ def parse_doc(xml):
     }
 
 
+EXTRA_PATH = os.path.join(DATA_DIR, "events_extra.json")
+
+
+def merge_extra(data):
+    """把人工核实补充的超重大事件合并进时间线（独立文件，文档同步不会覆盖）。
+
+    设计动机：资料库文档按月末更新，月中突发的治理级/监管级黑天鹅（如 11/12 英伟达
+    黄仁勋辞职）无法进入文档，导致事件日历漏掉最高权重变量。
+    """
+    if not os.path.exists(EXTRA_PATH):
+        data["meta"]["extra_count"] = 0
+        return data
+    try:
+        with open(EXTRA_PATH, "r", encoding="utf-8") as f:
+            extra = json.load(f)
+    except Exception as e:
+        print(f"[补充事件] 读取失败（跳过，不影响文档同步）：{e}")
+        data["meta"]["extra_count"] = 0
+        return data
+
+    seen = {
+        (str(e.get("iso") or "")[:10], re.sub(r"[^\w\u4e00-\u9fff]", "", str(e.get("event") or ""))[:14])
+        for e in data["timeline"]
+    }
+    added = 0
+    for e in extra.get("events", []):
+        key = (str(e.get("iso") or "")[:10], re.sub(r"[^\w\u4e00-\u9fff]", "", str(e.get("event") or ""))[:14])
+        if key in seen:
+            continue
+        seen.add(key)
+        e.setdefault("src", "extra")
+        data["timeline"].append(e)
+        added += 1
+
+    # 整体按 iso 排序（无 iso 的排最后，保持文档原序）
+    data["timeline"].sort(key=lambda x: (str(x.get("iso") or "9999-99-99"), x.get("date") or ""))
+    data["meta"]["extra_count"] = added
+    data["meta"]["extra_updated"] = extra.get("meta", {}).get("updated_at")
+    data["meta"]["extra_keep_days"] = extra.get("meta", {}).get("keep_days", 14)
+    print(f"[补充事件] 合并 {added} 条人工核实事件（共 {len(data['timeline'])} 条）")
+    return data
+
+
 def main():
     args = sys.argv[1:]
     mode = get_mode()
@@ -555,7 +598,7 @@ def main():
             print(f"--- Table{ti + 1} ({len(rows)}行) ---")
             for cells in rows[:4]:
                 print("  |", " | ".join(c[:22] for c in cells))
-        data = parse_doc(xml)
+        data = merge_extra(parse_doc(xml))
         print("\n=== 解析结果自检 ===")
         print(f"timeline={len(data['timeline'])} deep={len(data['deep'])} "
               f"sectors={len(data['sectors'])} risks={len(data['risks'])}")
@@ -566,7 +609,7 @@ def main():
         for e in data["timeline"][-5:]:
             print("  ", e["iso"], e["date"], e["imp"], e["certainty"], e["cat"], "|", e["event"][:40])
         return 0
-    data = parse_doc(xml)
+    data = merge_extra(parse_doc(xml))
     if not data["timeline"]:
         print("解析结果为空，保留原 events.json")
         return 1
